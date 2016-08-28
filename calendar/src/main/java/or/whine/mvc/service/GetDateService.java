@@ -34,14 +34,15 @@ public class GetDateService {
         //규칙이 없는 달의 마지막 날을 배열로 넣어둠
         if ((year % 4 == 0) && (year % 100 != 0) || year % 400 == 0) {
             endOfMonth[1] = 29;
-        } //윤년일 2월의 마지막 날을 29로 지정
+        } //윤년일 경우 2월의 마지막 날을 29로 지정
 
-        calVo.setEndOfMonth(endOfMonth[month-1]);
+        calVo.setEndOfMonth(endOfMonth[month-1]); //구하는 달의 마지막 날을 vo에 set시킴
 
         calVo.setYear(year);
         calVo.setMonth(month);
+        //넘어온 year와 month를 vo에 set함.
 
-        return calVo;
+        return calVo;  //vo를 넘겨줌
     } //end getCalendar method
 
 } //end getDateService class
