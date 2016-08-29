@@ -38,9 +38,9 @@
 <table>
     <thead>
     <tr id="calendarTitle">
-        <th><a href="#">←</a></th>
+        <th><a href="getOtherMonth?identifier=1">←</a></th>
         <th colspan="5">${calVo.year}년 ${calVo.month}월</th>
-        <th><a href="#">→</a></th>
+        <th><a href="getOtherMonth?identifier=2">→</a></th>
     </tr>
     <tr id="weekday">
         <th><font color="red">Sunday</font></th>

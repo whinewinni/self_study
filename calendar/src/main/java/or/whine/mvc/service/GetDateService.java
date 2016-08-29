@@ -15,6 +15,8 @@ public class GetDateService {
 
     public CalendarVo getCalendar(int year, int month){
 
+        //use getInstance method to get year and time
+        //because calendar is abstract class it doesn't have constructor
         Calendar calendar=Calendar.getInstance();
         //Calendar는 추상클래스라서 생성자를 제공하지 않아 getInstance method로
         // 현재 날짜와, 시간을 가지고 올수 있음
