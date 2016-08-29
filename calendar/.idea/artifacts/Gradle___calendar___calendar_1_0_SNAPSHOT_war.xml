@@ -1,0 +1,31 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="Gradle : calendar : calendar-1.0-SNAPSHOT.war">
+    <output-path>$PROJECT_DIR$/build/classes/artifacts/calendar</output-path>
+    <properties id="gradle-properties">
+      <options external-project-path="$PROJECT_DIR$" />
+    </properties>
+    <root id="archive" name="calendar-1.0-SNAPSHOT.war">
+      <element id="javaee-facet-resources" facet="calendar_main/web/Web Gradle : calendar-1.0-SNAPSHOT.war" />
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="classes">
+          <element id="module-output" name="calendar_main" />
+          <element id="dir-copy" path="$PROJECT_DIR$/build/resources/main" />
+        </element>
+        <element id="directory" name="lib">
+          <element id="library" level="project" name="Gradle: org.springframework:spring-context:4.3.2.RELEASE" />
+          <element id="library" level="project" name="Gradle: org.springframework:spring-webmvc:4.3.2.RELEASE" />
+          <element id="library" level="project" name="Gradle: jstl:jstl:1.2" />
+          <element id="library" level="project" name="Gradle: org.springframework:spring-aop:4.3.2.RELEASE" />
+          <element id="library" level="project" name="Gradle: org.springframework:spring-beans:4.3.2.RELEASE" />
+          <element id="library" level="project" name="Gradle: org.springframework:spring-core:4.3.2.RELEASE" />
+          <element id="library" level="project" name="Gradle: org.springframework:spring-expression:4.3.2.RELEASE" />
+          <element id="library" level="project" name="Gradle: org.springframework:spring-web:4.3.2.RELEASE" />
+          <element id="library" level="project" name="Gradle: commons-logging:commons-logging:1.2" />
+        </element>
+      </element>
+      <element id="directory" name="META-INF">
+        <element id="file-copy" path="$PROJECT_DIR$/build/classes/artifacts/calendar/exploded/calendar-1.0-SNAPSHOT.war/META-INF/MANIFEST.MF" />
+      </element>
+    </root>
+  </artifact>
+</component>

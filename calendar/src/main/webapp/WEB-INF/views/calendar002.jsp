@@ -69,7 +69,7 @@
                     calendarTag += "</tr><tr>";
                     weekDay = 0; //요일을 다시 일요일로 변경
                 }
-                calendarTag = calendarTag + '<td>' + i + '</td>';
+                calendarTag += '<td>' + i + '</td>';
                 //tag사이에 날짜를 넣어줌
                 weekDay++; //다음 요일로 변경
             }
@@ -78,9 +78,11 @@
             } //말일 후에 빈 칸을 넣음
             calendarTag += "</tr>"; //tbody tag 종료.
 
-            var tbody_tag = document.getElementById("tbody");
             //tbody tag 객체를 id로 가지고와서 tbody_tag에 저장
-            tbody_tag.innerHTML = calendarTag; //tbody_tag에 calendarTag변수를 넣어준다.
+            var tbody_tag = document.getElementById("tbody");
+
+            //tbody_tag에 calendarTag변수를 넣어준다.
+            tbody_tag.innerHTML = calendarTag;
         }
         function otherMonth(identifier) { //identifier로 전달인지, 다음달인지 구분함.
             var month=document.getElementById('currentMonth').value;
