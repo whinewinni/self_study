@@ -63,7 +63,7 @@ public class CalendarController {
         int year=calendarVo.getYear();
         int month=calendarVo.getMonth();
         // check the identifier variable (1 or 2)
-        if (identifier==1){
+/*        if (identifier==1){
             //if month is January then the month is changing to December and year is 1 year going down
             if (month==1){
                 month=12;
@@ -79,7 +79,7 @@ public class CalendarController {
             }else {
                 month+=1;
             }
-        }
+        }*/
         calendarVo=getDateService.getCalendar(year, month);
         model.addAttribute("calVo", calendarVo);
         return "calendar003";

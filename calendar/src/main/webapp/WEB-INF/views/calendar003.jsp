@@ -38,9 +38,9 @@
 <table>
     <thead>
     <tr id="calendarTitle">
-        <th><a href="getOtherMonth?identifier=1">←</a></th>
+        <th><a href="version2calendar?identifier=1">←</a></th>
         <th colspan="5">${calVo.year}년 ${calVo.month}월</th>
-        <th><a href="getOtherMonth?identifier=2">→</a></th>
+        <th><a href="version2calendar?identifier=2">→</a></th>
     </tr>
     <tr id="weekday">
         <th><font color="red">Sunday</font></th>
@@ -74,7 +74,6 @@
             <td></td>
         </c:forEach> <%--달의 말일이 끝나고 빈칸을 표시하기 위해 td를 넣어줌--%>
         </tr> <%--테이블을 닫음--%>
-
     </tbody>
 </table>
 
