@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.Calendar;
+import java.util.Date;
 
 /**
  * Created by User on 2016-08-30.
@@ -27,6 +28,10 @@ public class CalendarControllerVersionII {
     public String getCalendar(Model model, @RequestParam(value = "identifier", required = false, defaultValue = "0")int identifier){
 
         Calendar calendar=Calendar.getInstance();
+
+        /*calendar.add(Calendar.DATE, 1);
+        Date tempCalendar = calendar.getTime();*/
+
         int year=calendar.get(Calendar.YEAR);
         int month=calendar.get(Calendar.MONTH);
 
@@ -45,7 +50,6 @@ public class CalendarControllerVersionII {
                 month+=1;
             }
         }
-
         CalendarVo calendarVo=getDateService.getCalendar(year, (month+1));
         model.addAttribute("calVo", calendarVo);
 

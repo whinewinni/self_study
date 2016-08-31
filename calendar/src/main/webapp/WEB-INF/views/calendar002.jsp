@@ -5,9 +5,9 @@
 
     <style>
         table {
-            border: 5px solid black;
+            border: 5px solid #b4dad2;
             border-radius: 10px;
-            background-color: black;
+            background-color: #b4dad2;
         }
 
         td {
@@ -32,6 +32,47 @@
         }
 
     </style>
+
+
+
+</head>
+<body>
+
+    <div>
+        <%--현재 표시되는 년과 달을 tag에 넣어둠 달력이 넘어갈 때 사용하기 위함--%>
+        <input type="text" id="currentYear">
+        <input type="text" id="currentMonth">
+    </div>
+
+    <table>
+        <thead>
+        <tr id="calendarTitle">
+            <th><a href="#" onclick="otherMonth(1)">←</a></th>
+            <th colspan="5" id="showdate">날짜나올자리</th>
+            <th><a href="#" onclick="otherMonth(2)">→</a></th>
+        </tr>
+        <tr id="weekday">
+            <th><font color="red">Sunday</font></th>
+            <th>Monday</th>
+            <th>Tuesday</th>
+            <th>Wednesday</th>
+            <th>Thursday</th>
+            <th>Friday</th>
+            <th><font color="#00bfff">Saturday</font></th>
+        </tr>
+        </thead>
+        <tbody id="tbody">
+        <%--<tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>--%>
+        </tbody>
+    </table>
 
     <script>
         window.onload = function () {
@@ -110,41 +151,6 @@
             getCalendar(year, month); //다른 달을 표시하기 위해 call
         }
     </script>
-
-</head>
-<body>
-    <%--현재 표시되는 년과 달을 tag에 넣어둠 달력이 넘어갈 때 사용하기 위함--%>
-    <input type="text" id="currentYear">
-    <input type="text" id="currentMonth">
-<table>
-    <thead>
-    <tr id="calendarTitle">
-        <th><a href="#" onclick="otherMonth(1)">←</a></th>
-        <th colspan="5" id="showdate">날짜나올자리</th>
-        <th><a href="#" onclick="otherMonth(2)">→</a></th>
-    </tr>
-    <tr id="weekday">
-        <th><font color="red">Sunday</font></th>
-        <th>Monday</th>
-        <th>Tuesday</th>
-        <th>Wednesday</th>
-        <th>Thursday</th>
-        <th>Friday</th>
-        <th><font color="#00bfff">Saturday</font></th>
-    </tr>
-    </thead>
-    <tbody id="tbody">
-    <%--<tr>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-    </tr>--%>
-    </tbody>
-</table>
 
 </body>
 </html>
