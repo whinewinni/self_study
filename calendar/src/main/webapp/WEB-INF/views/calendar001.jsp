@@ -2,6 +2,91 @@
 <html>
 <head>
     <title>$Title$</title>
+</head>
+<body>
+
+    <div>
+        <input type="text" id="currentYear">
+        <input type="text" id="currentMonth">
+    </div>
+
+    <table style="height: 300px ; width: 600px">
+        <thead style="background-color: #d3ffe6">
+        <tr style="text-align: center">
+            <td><a href="#" onclick="otherMonth(1)">←</a></td>
+            <td colspan="5" id="showDate"></td>
+            <td><a href="#" onclick="otherMonth(2)">→</a></td>
+        </tr>
+        <tr>
+            <th>Sunday</th>
+            <th>Monday</th>
+            <th>Tuesday</th>
+            <th>Wednesday</th>
+            <th>Thursday</th>
+            <th>Friday</th>
+            <th>Saturday</th>
+        </tr>
+        </thead>
+
+        <tbody id="calendar">
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+
+        </tbody>
+    </table>
+
     <script>
         function getCalendar(nowYear, nowMonth) {
             setClear(); //table안에 내용을 지움
@@ -85,89 +170,5 @@
             }
         }
     </script>
-
-</head>
-<body>
-
-<input type="text" id="currentYear">
-<input type="text" id="currentMonth">
-
-<table style="height: 300px ; width: 600px">
-    <thead style="background-color: #d3ffe6">
-    <tr style="text-align: center">
-        <td><a href="#" onclick="otherMonth(1)">←</a></td>
-        <td colspan="5" id="showDate"></td>
-        <td><a href="#" onclick="otherMonth(2)">→</a></td>
-    </tr>
-    <tr>
-        <th>Sunday</th>
-        <th>Monday</th>
-        <th>Tuesday</th>
-        <th>Wednesday</th>
-        <th>Thursday</th>
-        <th>Friday</th>
-        <th>Saturday</th>
-    </tr>
-    </thead>
-
-    <tbody id="calendar">
-    <tr>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-    </tr>
-    <tr>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-    </tr>
-    <tr>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-    </tr>
-    <tr>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-    </tr>
-    <tr>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-    </tr>
-    <tr>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-    </tr>
-
-    </tbody>
-
-</table>
 </body>
 </html>

@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.Calendar;
-import java.util.Date;
 
 /**
  * Created by User on 2016-08-30.
@@ -18,41 +17,44 @@ import java.util.Date;
 @Controller
 public class CalendarControllerVersionII {
 
+    /*private Calendar calendar;
+
+    public CalendarControllerVersionII() {
+        System.out.println("나와라!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+        calendar=Calendar.getInstance();
+    }*/
 
     @Autowired
     private GetDateService getDateService;
 
-
+    //어찌해야할까...
+    private Calendar calendar=Calendar.getInstance();
     @RequestMapping(value = "version2calendar")
     //if parameter is null, then the parameter value is "0"
     public String getCalendar(Model model, @RequestParam(value = "identifier", required = false, defaultValue = "0")int identifier){
 
-        Calendar calendar=Calendar.getInstance();
+        /*the identifier variable of previous month is "-1", next month is "1"
+        Calendar Month can get a current month
+        add method can adds or subtracts the specified amount of time.*/
+        calendar.add(Calendar.MONTH, identifier);
 
-        /*calendar.add(Calendar.DATE, 1);
-        Date tempCalendar = calendar.getTime();*/
-
+        //get year and month from calendar variable
         int year=calendar.get(Calendar.YEAR);
         int month=calendar.get(Calendar.MONTH);
 
-        if (identifier==1){
-            if (month==1){
-                month=12;
-                year-=1;
-            }else {
-                month-=1;
-            }
-        }else if (identifier==2){
-            if (month==12){
-                month=1;
-                year+=1;
-            }else {
-                month+=1;
-            }
+        //get today date, for focus today styling
+        int today=calendar.get(Calendar.DATE);
+        if (identifier==0){
+            model.addAttribute("todayStyle", today);
         }
+
+        //give year and month to getDateService
+        //after then, get calendarVo
         CalendarVo calendarVo=getDateService.getCalendar(year, (month+1));
+        //Add the supplied name
         model.addAttribute("calVo", calendarVo);
 
+        //return view name
         return "calendar003";
     }
 
