@@ -43,9 +43,12 @@
     <table>
         <thead>
             <tr id="calendarTitle">
-                <th><a href="version2calendar?identifier=-1">←</a></th>
+                <%--<th><a href="version2calendar?identifier=-1">←</a></th>
                 <th colspan="5">${calVo.year}년 ${calVo.month}월</th>
-                <th><a href="version2calendar?identifier=1">→</a></th>
+                <th><a href="version2calendar?identifier=1">→</a></th>--%>
+                <th><a href="otherMonth2?identifier=-1">←</a></th>
+                <th colspan="5">${calVo.year}년 ${calVo.month}월</th>
+                <th><a href="otherMonth2?identifier=1">→</a></th>
             </tr>
             <tr id="weekday">
                 <th><font color="#FF173E">Sunday</font></th>
