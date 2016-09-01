@@ -17,10 +17,11 @@ import java.util.Calendar;
 @Controller
 public class CalendarControllerVersionII {
 
-    /*private Calendar calendar;
+   /* private Calendar calendar;
 
+    //생성자로 하면 한번만 불러옴.
     public CalendarControllerVersionII() {
-        System.out.println("나와라!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+
         calendar=Calendar.getInstance();
     }*/
 
@@ -29,6 +30,7 @@ public class CalendarControllerVersionII {
 
     //어찌해야할까...
     private Calendar calendar=Calendar.getInstance();
+
     @RequestMapping(value = "version2calendar")
     //if parameter is null, then the parameter value is "0"
     public String getCalendar(Model model, @RequestParam(value = "identifier", required = false, defaultValue = "0")int identifier){
