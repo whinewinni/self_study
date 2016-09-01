@@ -19,7 +19,7 @@ public class CalendarVer2{
     /*년과 달로 인자값을 넘기지 않고 calendar로 인자값을 넘기면
     이번해에는 값이 문제 없지만 다른 년도로 넘어 갔을때 문제가 있다.
     calendar객체를 넘기면 다른 문제가 ....나온다....
-    해결해야한다!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!*/
+    해결해야한다!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!*/
 
     @Autowired
     private GetDateService002 getDateService;
