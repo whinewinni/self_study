@@ -1,6 +1,5 @@
 package or.whine.mvc.controller_ver2;
 
-import or.whine.mvc.service.GetDateService;
 import or.whine.mvc.service.GetDateService002;
 import or.whine.vo.CalendarVo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,6 +32,7 @@ public class CalendarVer2{
         int date=calendar.get(Calendar.DATE);
         model.addAttribute("todayStyle", date);
 
+        //Calendar를 인자값으로 넘겨준다.
         CalendarVo calendarVo=getDateService.getCalendar2(calendar);
 
         model.addAttribute("calVo", calendarVo);

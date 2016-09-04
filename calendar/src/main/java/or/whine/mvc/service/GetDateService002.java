@@ -11,6 +11,8 @@ import java.util.Calendar;
 @Service
 public class GetDateService002 {
 
+    //인자값으로 Calendar를 넘겨 받아 Calendar가 가지고 있는 날짜를 가지고 와서 사용한다.
+
     public CalendarVo getCalendar2(Calendar cal){
 
         int year=cal.get(Calendar.YEAR);
