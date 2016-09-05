@@ -92,9 +92,9 @@
                                     <td id="getHoverStayle">${i}</td>
                                 </c:when>
                                 <%--if "${i}"is today date then, add "todayStyle"--%>
-                                <c:when test="${todayStyle==i}">
-                                    <td id="todayStyle">${i}</td>
-                                </c:when>
+                            <c:when test="${todayStyle==i}">
+                                <td id="todayStyle">${i}</td>
+                            </c:when>
                             </c:choose>
                         <c:set var="weekDay" value="${weekDay+1}"/> <%--요일을 하루씩 증가함--%>
                     </c:forEach> <%--1부터 마지막 날까지 반복(i값임)해서 td에 넣어줌--%>
@@ -108,9 +108,9 @@
 
         <div id="layerPopup">
             <form action="saveContents" method="post">
-                title : <input type="text" value="title" name="scheduleTitle">
-                contents : <input type="text" value="contents" name="scheduleContents">
-                <button type="submit"/>
+                title : <input type="text" value="title" name="title">
+                contents : <input type="text" value="contents" name="content">
+                <button type="submit">Save</button>
             </form>
         </div>
 
@@ -121,7 +121,6 @@
     <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.js"></script>
 
     <script>
-
         $(document).ready(function () {
 
             $("#layerPopup").hide();

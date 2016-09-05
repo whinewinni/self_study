@@ -1,6 +1,8 @@
 package or.whine.mvc.controller;
 
+import or.whine.mvc.service.CalendarService;
 import or.whine.mvc.service.GetDateService;
+import or.whine.vo.CalendarContentVO;
 import or.whine.vo.CalendarVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -8,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import javax.annotation.Resource;
 import java.util.Calendar;
 
 /**
@@ -15,6 +18,9 @@ import java.util.Calendar;
  */
 @Controller
 public class CalendarControllerVersion3 {
+
+    @Resource   //interface~~ 하아 어렵구나..ㅠㅠ
+    private CalendarService calendarService;
 
     @Autowired
     private GetDateService getDateService;
@@ -70,8 +76,9 @@ public class CalendarControllerVersion3 {
 
     //확인용!!!!
     @RequestMapping(value = "saveContents", method= RequestMethod.POST)
-    public String save(String scheduleTitle, String scheduleContents){
-        System.out.println(scheduleContents+" "+scheduleTitle);
+    public String save(CalendarContentVO calendarContentVO){
+        /*System.out.println(scheduleContents+" "+scheduleTitle);*/
+        calendarService.insertCalendarContent(calendarContentVO);
         return "redirect:/currentCal";
     }
 

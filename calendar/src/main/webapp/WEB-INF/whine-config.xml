@@ -22,5 +22,30 @@
         <property name="suffix" value=".jsp"/>
     </bean>
 
+    <!--context.xml을 읽어 들여오기 위한 설정 (context.xml이랑 같음 property가!)-->
+    <bean id="dataSource" class="org.springframework.jdbc.datasource.SimpleDriverDataSource">
+        <property name="driverClass" value="oracle.jdbc.driver.OracleDriver"/>
+        <property name="url" value="jdbc:oracle:thin:@localhost:1521:xe"/>
+        <property name="username" value="winni"/>
+        <property name="password" value="winni"/>
+    </bean>
+
+    <!--gradle에 ORM추가--> <!--spring-hibernate 설정하는 거임-->
+    <bean id="sessionFactory" class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
+        <property name="dataSource" ref="dataSource"/>
+        <!--C:\winni\workspace\Intellij_workspace\self_study\calendar\src\main\resources\hibernate.cfg.xml-->
+        <property name="configLocation" value="classpath:hibernate.cfg.xml"/>
+        <property name="hibernateProperties">
+            <props>
+                <prop key="dialect">org.hibernate.dialect.Oracle10gDialect</prop>
+                <prop key="show_sql">true</prop>
+            </props>
+        </property>
+    </bean>
+
+    <bean id="transactionManager" class="org.springframework.orm.hibernate5.HibernateTransactionManager">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+
 
 </beans>
