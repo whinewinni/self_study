@@ -35,6 +35,27 @@
             background-color: white;
             color: #b4dad2;
         }
+        .popupbtn {
+            border: none;
+            color: darkgray;
+            padding: 3px 5px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 11px;
+            margin: 4px 2px;
+            transition-duration: 0.4s;
+            cursor: pointer;
+            background-color: white;
+            color: black;
+            border: 2px solid #e7e7e7;
+            border-radius: 5px;
+        }
+        .popupbtn:hover {
+            color: white;
+            font-weight: bold;
+            background-color: #e7e7e7;
+        }
     </style>
 
 </head>
@@ -92,9 +113,9 @@
                                     <td id="getHoverStayle">${i}</td>
                                 </c:when>
                                 <%--if "${i}"is today date then, add "todayStyle"--%>
-                            <c:when test="${todayStyle==i}">
-                                <td id="todayStyle">${i}</td>
-                            </c:when>
+                                <c:when test="${todayStyle==i}">
+                                    <td id="todayStyle">${i}</td>
+                                </c:when>
                             </c:choose>
                         <c:set var="weekDay" value="${weekDay+1}"/> <%--요일을 하루씩 증가함--%>
                     </c:forEach> <%--1부터 마지막 날까지 반복(i값임)해서 td에 넣어줌--%>
@@ -108,9 +129,9 @@
 
         <div id="layerPopup">
             <form action="saveContents" method="post">
-                title : <input type="text" value="title" name="title">
+                title : <input type="text" value="title" name="title"><br>
                 contents : <input type="text" value="contents" name="content">
-                <button type="submit">Save</button>
+                <button type="submit" class="popupbtn">Save</button>
             </form>
         </div>
 
