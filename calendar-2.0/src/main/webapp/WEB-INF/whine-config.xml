@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/cache http://www.springframework.org/schema/cache/spring-cache.xsd http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+    <!--component 어노테이션으로 선언된 클래스를 bean으로 자동 등록함.
+    어노테이션이 적용된 class(@Controller, @Service, @Repository 를 포함한 class)를
+    로딩 base-package로 부터 스캔을 할 때 Controller 타입은 제외 시킨다.
+    제외 시키는 이유는 spring mvc에 관련된 설정 파일은 dispatcher-servlet.xml 에서 스캔 하기 때문이다-->
+    <context:component-scan base-package="or.whine.mvc"/>
+    <!--@Controller, @Service, @Component, @Repository 와 같은 애노테이션 설정은
+    component-scan 에 패키지 아래에  있으면 빈으로 설정됨-->
+    <mvc:annotation-driven />
+    <!--DispatcherServlet이 처리하지 못한 요청을 서블릿 컨테이너의 DefaultServlet에게 넘겨주는 역할을 하는 핸들러-->
+    <mvc:default-servlet-handler/>
+
+    <!--prefix, suffix를 사용하여 어떤경로에 존재하는 페이지들을 인지하고 분석하는지 지정-->
+    <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="prefix" value="/WEB-INF/views/"/>
+        <property name="suffix" value=".jsp"/>
+    </bean>
+
+    <!--context.xml을 읽어 들여오기 위한 설정 (context.xml이랑 같음 property가!)-->
+    <bean id="dataSource" class="org.springframework.jdbc.datasource.SimpleDriverDataSource">
+        <property name="driverClass" value="oracle.jdbc.driver.OracleDriver"/>
+        <property name="url" value="jdbc:oracle:thin:@localhost:1521:xe"/>
+        <property name="username" value="winni"/>
+        <property name="password" value="winni"/>
+    </bean>
+
+    <!--gradle에 ORM추가--> <!--spring-hibernate 설정하는 거임-->
+    <bean id="sessionFactory" class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
+        <property name="dataSource" ref="dataSource"/>
+        <!--C:\winni\workspace\Intellij_workspace\self_study\calendar\src\main\resources\hibernate.cfg.xml-->
+        <property name="configLocation" value="classpath:hibernate.cfg.xml"/>
+        <property name="hibernateProperties">
+            <props>
+                <prop key="dialect">org.hibernate.dialect.Oracle10gDialect</prop>
+                <prop key="show_sql">true</prop>
+            </props>
+        </property>
+    </bean>
+
+    <bean id="transactionManager" class="org.springframework.orm.hibernate5.HibernateTransactionManager">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+</beans>
