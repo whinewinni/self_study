@@ -1,8 +1,9 @@
 package or.whine.domain;
 
-import javax.persistence.Column;
+import org.hibernate.annotations.*;
+
+import javax.persistence.*;
 import javax.persistence.Entity;
-import javax.persistence.Id;
 import javax.persistence.Table;
 
 /**
@@ -13,7 +14,11 @@ import javax.persistence.Table;
 @Table(name = "calendarTable")
 public class CalendarDomain {
 
-    @Id
+    @Id      //시퀀스  //아래는 nextVal처럼, 시퀀스를 증가하게 해주는 어노테이션 설정해줘야함-_-
+    @GeneratedValue(generator = "calendarnumNextVal", strategy = GenerationType.SEQUENCE)
+    /*@GenericGenerator(name = "calendarnumNextVal", strategy = "SEQUENCE",
+                      parameters ={@org.hibernate.annotations.Parameter(name="SEQUENCE", value = "calendarTable_seq")})*/
+    @SequenceGenerator(name = "calendarnumNextVal", sequenceName = "calendarTable_seq")
     @Column(name = "calendarnum")
     private int calendarnum;
     @Column(name = "year")

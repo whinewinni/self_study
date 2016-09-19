@@ -127,6 +127,9 @@
 
     <div id="layerPopup">
         <form action="saveContents" method="post">
+            <input type="text" value="${calBean.year}" name="year">
+            <input type="text" value="${calBean.month+1}" name="month">
+            <input type="text" value="" name="day"  id="nowday"><br>
             title : <input type="text" value="title" name="title"><br>
             contents : <input type="text" value="contents" name="content">
             <button type="submit" class="popupbtn">Save</button>
@@ -144,9 +147,10 @@
 
             $("tbody tr td").click(function () {
                 if ($(this).text()!=""){
+                    $("#nowday").val($(this).text());
                     /*alert($("#year").val()+"-"+$("#month").val()+"-"+$(this).text());*/
                     $("#layerPopup").dialog();
-                    $("#ui-id-1").text($("#year").val()+"-"+$("#month").val()+"-"+$(this).text());
+                    $("#ui-id-1").text($("#year").val()+"-"+($("#month").val()+1)+"-"+$(this).text());
                 }
             });
 
