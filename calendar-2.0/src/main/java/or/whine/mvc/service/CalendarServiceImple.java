@@ -1,12 +1,13 @@
 package or.whine.mvc.service;
 
 import or.whine.bean.CalendarBean;
-import or.whine.domain.CalendarDomain;
+import or.whine.domain.CalendarTable;
 import or.whine.mvc.repository.CalendarRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Calendar;
+import java.util.List;
 
 /**
  * Created by Winni on 2016-09-18.
@@ -68,7 +69,11 @@ public class CalendarServiceImple implements CalendarServiceInterface{
     @Autowired
     private CalendarRepository calendarRepository;
 
-    public void insertCalendarContent(CalendarDomain calendarDomain) {
-        calendarRepository.insertContents(calendarDomain);
+    public void insertCalendarContent(CalendarTable calendarTable) {
+        calendarRepository.insertContents(calendarTable);
+    }
+
+    public List<CalendarTable> listCalendartitle(int year, int month) {
+        return calendarRepository.listAll(year, month);
     }
 } //end CalendarServiceImple class

@@ -110,7 +110,14 @@
                         <c:set var="weekDay" value="1"/>
                     </c:if>
 
-                    <td id="focusToday">${i}</td>
+                    <td id="focusToday">
+                        ${i}<br>
+                            <c:forEach var="listAll" items="${listAll}">
+                                <c:if test="${i==listAll.day}">
+                                    ${listAll.title}
+                                </c:if>
+                            </c:forEach>
+                    </td>
 
                     <%--요일을 하루씩 증가함--%>
                     <c:set var="weekDay" value="${weekDay+1}"/>

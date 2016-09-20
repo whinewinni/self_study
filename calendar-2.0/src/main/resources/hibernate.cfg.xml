@@ -4,6 +4,6 @@
         "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
 <hibernate-configuration>
     <session-factory>
-        <mapping class="or.whine.domain.CalendarDomain"/>
+        <mapping class="or.whine.domain.CalendarTable"/>
     </session-factory>
 </hibernate-configuration>

@@ -12,7 +12,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "calendarTable")
-public class CalendarDomain {
+public class CalendarTable {
 
     @Id      //시퀀스  //아래는 nextVal처럼, 시퀀스를 증가하게 해주는 어노테이션 설정해줘야함-_-!
     @GeneratedValue(generator = "calendarnumNextVal", strategy = GenerationType.SEQUENCE)

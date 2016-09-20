@@ -1,7 +1,7 @@
 package or.whine.mvc.controller;
 
 import or.whine.bean.CalendarBean;
-import or.whine.domain.CalendarDomain;
+import or.whine.domain.CalendarTable;
 import or.whine.mvc.service.CalendarServiceImple;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import java.util.Calendar;
+import java.util.List;
 
 /**
  * Created by Winni on 2016-09-18.
@@ -33,6 +34,9 @@ public class CalendarController {
         //get year and month from calendar variable
         int year=calendar.get(Calendar.YEAR);
         int month=calendar.get(Calendar.MONTH);
+
+        List<CalendarTable> listAll=getDataService.listCalendartitle(year, month+1);
+        model.addAttribute("listAll", listAll);
 
         //give year and month to getDateService
         //after then, get calendarVo
@@ -67,8 +71,8 @@ public class CalendarController {
     }
 
     @RequestMapping(value = "saveContents", method= RequestMethod.POST)
-    public String saveContent(CalendarDomain calendarDomain){
-        getDataService.insertCalendarContent(calendarDomain);
+    public String saveContent(CalendarTable calendarTable){
+        getDataService.insertCalendarContent(calendarTable);
         return "redirect:/getCurrentCal";
     }
 } //end CalendarController class
