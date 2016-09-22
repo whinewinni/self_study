@@ -35,6 +35,7 @@ public class CalendarController {
         int year=calendar.get(Calendar.YEAR);
         int month=calendar.get(Calendar.MONTH);
 
+        //get CalendarTable domain from listCalendartitle
         List<CalendarTable> listAll=getDataService.listCalendartitle(year, month+1);
         model.addAttribute("listAll", listAll);
 
@@ -60,6 +61,11 @@ public class CalendarController {
         int year=calendar.get(Calendar.YEAR);
         int month=calendar.get(Calendar.MONTH);
 
+        //get CalendarTable domain from listCalendartitle
+        List<CalendarTable> listAll=getDataService.listCalendartitle(year, month+1);
+        //listAll value is for showing title
+        model.addAttribute("listAll", listAll);
+
         //give year and month to getDateService after then, get calendarBean
         CalendarBean calendarBean=getDataService.getCalendar(year, month);
 
@@ -72,6 +78,8 @@ public class CalendarController {
 
     @RequestMapping(value = "saveContents", method= RequestMethod.POST)
     public String saveContent(CalendarTable calendarTable){
+        calendarTable.getYear();
+        calendarTable.getMonth();
         getDataService.insertCalendarContent(calendarTable);
         return "redirect:/getCurrentCal";
     }

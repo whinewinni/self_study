@@ -30,8 +30,6 @@ public class CalendarRepository {
     }
 
     public List<CalendarTable> listAll(int year, int month){
-        System.out.println("year "+year);
-        System.out.println("month "+month);
         Session session=sessionFactory.openSession();
         session.beginTransaction();
         Query query=session.createQuery("from CalendarTable where year=:year and month=:month");

@@ -22,6 +22,9 @@
             padding: 5px;
             width: 90px
         }
+        /*tbody tbody td{
+            height: 50px;
+        }*/
         #weekday{
             color: white;
         }
@@ -62,10 +65,16 @@
             font-weight: bold;
             background-color: #e7e7e7;
         }
+        .contentstitle{
+            width: 100%;
+            font-size:20%;
+            background-color: #e7e7e7;
+            text-align: right;
+        }
     </style>
 </head>
 <body>
-    <div>
+    <div style="display: none">
         <input type="text" id="year" value="${calBean.year}"/>
         <input type="text" id="month" value="${calBean.month}"/>
         <input type="text" id="endOfMonth" value="${calBean.endOfMonthDay}"/>
@@ -111,12 +120,29 @@
                     </c:if>
 
                     <td id="focusToday">
-                        ${i}<br>
-                            <c:forEach var="listAll" items="${listAll}">
-                                <c:if test="${i==listAll.day}">
-                                    ${listAll.title}
-                                </c:if>
-                            </c:forEach>
+                        <div>
+                            <div style="height: 50%">
+                                ${i}<br>
+                            </div>
+                            <div style="height: 50%">
+                                <c:forEach var="listAll" items="${listAll}">
+                                    <%--if i is same with listAll.day, then shows the title--%>
+                                    <c:if test="${i==listAll.day}">
+                                        <div class="contentstitle">${listAll.title}</div>
+                                    </c:if>
+                                    <%--------------------------------------------------------------
+                                    <c:choose>
+                                        <c:when test="${i==listAll.day}">
+                                            <div class="contentstitle">${listAll.title}</div>
+                                        </c:when>
+                                        <c:when test="${listAll.day eq null}">
+                                            <div>　</div>
+                                        </c:when>
+                                    </c:choose>
+                                    --------------------------------------------------------------%>
+                                </c:forEach>
+                            </div>
+                        </div>
                     </td>
 
                     <%--요일을 하루씩 증가함--%>
