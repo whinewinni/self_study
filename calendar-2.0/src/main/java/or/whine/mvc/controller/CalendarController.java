@@ -83,4 +83,10 @@ public class CalendarController {
         getDataService.insertCalendarContent(calendarTable);
         return "redirect:/getCurrentCal";
     }
+
+    @RequestMapping(value = "updateContents", method = RequestMethod.POST)
+    public String updateContents(CalendarTable calendarTable){
+        getDataService.updateContents(calendarTable);
+        return "redirect:/getCurrentCal";
+    }
 } //end CalendarController class

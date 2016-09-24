@@ -76,4 +76,8 @@ public class CalendarServiceImple implements CalendarServiceInterface{
     public List<CalendarTable> listCalendartitle(int year, int month) {
         return calendarRepository.listAll(year, month);
     }
+
+    public void updateContents(CalendarTable calendarTable) {
+        calendarRepository.update(calendarTable);
+    }
 } //end CalendarServiceImple class

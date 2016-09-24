@@ -43,6 +43,24 @@ public class CalendarRepository {
         return list;
     }
 
+    public void update(CalendarTable calendarTable){
+        Session session=sessionFactory.openSession();
+        session.beginTransaction();
+        String updateQuery="UPDATE CalendarTable set title=:title, content=:content WHERE calendarnum=:calendarnum";
+        Query query=session.createQuery(updateQuery);
+        query.setParameter("title", calendarTable.getTitle());
+        query.setParameter("content", calendarTable.getContent());
+        query.setParameter("calendarnum", calendarTable.getCalendarnum());
+        int q=query.executeUpdate();
+        System.out.println(q);
+        //session.update(calendarTable);
+        session.getTransaction().commit();
+        if (session!=null){
+            session.close();
+        }
+    }
+
+
 
 
 } //end CalendarRepository class

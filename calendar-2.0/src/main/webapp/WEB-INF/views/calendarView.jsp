@@ -128,7 +128,11 @@
                                 <c:forEach var="listAll" items="${listAll}">
                                     <%--if i is same with listAll.day, then shows the title--%>
                                     <c:if test="${i==listAll.day}">
-                                        <div class="contentstitle">${listAll.title}</div>
+                                        <div class="contentstitle">
+                                            ${listAll.title}
+                                            <input type="hidden" value="${listAll.content}" />
+                                            <input type="hidden" value="${listAll.calendarnum}"/>
+                                        </div>
                                     </c:if>
                                     <%--------------------------------------------------------------
                                     <c:choose>
@@ -158,18 +162,21 @@
         </tbody>
     </table>
 
-    <div id="layerPopup">
-        <form action="saveContents" method="post">
-            <input type="text" value="${calBean.year}" name="year">
-            <input type="text" value="${calBean.month+1}" name="month">
-            <input type="text" value="" name="day"  id="nowday"><br>
-            title : <input type="text" value="title" name="title"><br>
-            contents : <input type="text" value="contents" name="content">
+    <div id="layerPopup" style="display: none">
+        <form action="saveContents" method="post" id="sendData">
+            <div>
+                <input type="text" value="${calBean.year}" name="year"/>
+                <input type="text" value="${calBean.month+1}" name="month"/>
+                <input type="text" value="" name="day"  id="nowday"/><br>
+                <input type="text" value="" name="calendarnum" id="calendarnum" />
+            </div>
+            title : <input type="text" value="title" name="title" id="title"/><br>
+            contents : <input type="text" value="content" name="content" id="content"/>
             <button type="submit" class="popupbtn">Save</button>
         </form>
     </div>
 
-    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.0/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.0/themes/base/jquery-ui.css" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.js"></script>
 
@@ -180,10 +187,35 @@
 
             $("tbody tr td").click(function () {
                 if ($(this).text()!=""){
-                    $("#nowday").val($(this).text());
+                    //to remove space
+                    var showDay=$.trim($(this).text());
+                    //get only day(i) value
+                    showDay=showDay.split(" ")[0];
+
+                    $("#nowday").val(showDay);
                     /*alert($("#year").val()+"-"+$("#month").val()+"-"+$(this).text());*/
                     $("#layerPopup").dialog();
-                    $("#ui-id-1").text($("#year").val()+"-"+($("#month").val()+1)+"-"+$(this).text());
+                    //to operate month
+                    var showMonth=parseInt($("#month").val())+1;
+                    $("#ui-id-1").text($("#year").val()+"-"+showMonth+"-"+showDay);
+                }
+            });
+
+            $(".contentstitle").click(function () {
+                if ($(this).text()!=null){
+
+                    console.log($(this).children().val());
+                    console.log($(this).children().eq(1).val());
+
+                    //change dialog title and content
+                    $("#title").val($.trim($(this).text()));
+                    $("#content").val($(this).children().val());
+                    $("#calendarnum").val($(this).children().eq(1).val());
+
+                    //change form tag action to updateContets
+                    $("#sendData").attr('action', 'updateContents');
+                    $(".popupbtn").html("UPDATE");
+
                 }
             });
 
