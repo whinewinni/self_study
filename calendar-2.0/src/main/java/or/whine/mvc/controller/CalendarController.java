@@ -80,13 +80,24 @@ public class CalendarController {
     public String saveContent(CalendarTable calendarTable){
         calendarTable.getYear();
         calendarTable.getMonth();
+        //send calendarTable(parameter) Domain to insertCalendarContent method in CalendarServiceImple class
         getDataService.insertCalendarContent(calendarTable);
+        //set view name
         return "redirect:/getCurrentCal";
     }
 
     @RequestMapping(value = "updateContents", method = RequestMethod.POST)
     public String updateContents(CalendarTable calendarTable){
+        //send calendarTable(parameter) Domain to updateContents method in CalendarServiceImple class
         getDataService.updateContents(calendarTable);
         return "redirect:/getCurrentCal";
     }
+
+    @RequestMapping(value = "deleteContent")
+    public String deleteContent(int calendarnum){
+        //send calendarnum(parameter) value to deleteContent method in CalendarServiceImple class
+        getDataService.deleteContent(calendarnum);
+        return "redirect:/getCurrentCal";
+    }
+
 } //end CalendarController class

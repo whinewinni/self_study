@@ -120,11 +120,10 @@
                     </c:if>
 
                     <td id="focusToday">
-                        <div>
-                            <div style="height: 50%">
+                            <div id="appearDate" style="height: 50%">
                                 ${i}<br>
                             </div>
-                            <div style="height: 50%">
+                            <div id="appearTitle" style="height: 50%">
                                 <c:forEach var="listAll" items="${listAll}">
                                     <%--if i is same with listAll.day, then shows the title--%>
                                     <c:if test="${i==listAll.day}">
@@ -134,19 +133,8 @@
                                             <input type="hidden" value="${listAll.calendarnum}"/>
                                         </div>
                                     </c:if>
-                                    <%--------------------------------------------------------------
-                                    <c:choose>
-                                        <c:when test="${i==listAll.day}">
-                                            <div class="contentstitle">${listAll.title}</div>
-                                        </c:when>
-                                        <c:when test="${listAll.day eq null}">
-                                            <div>　</div>
-                                        </c:when>
-                                    </c:choose>
-                                    --------------------------------------------------------------%>
                                 </c:forEach>
                             </div>
-                        </div>
                     </td>
 
                     <%--요일을 하루씩 증가함--%>
@@ -165,8 +153,8 @@
     <div id="layerPopup" style="display: none">
         <form action="saveContents" method="post" id="sendData">
             <div>
-                <input type="text" value="${calBean.year}" name="year"/>
-                <input type="text" value="${calBean.month+1}" name="month"/>
+                <input type="text" value="year = ${calBean.year}" name="year"/>
+                <input type="text" value="month = ${calBean.month+1}" name="month"/>
                 <input type="text" value="" name="day"  id="nowday"/><br>
                 <input type="text" value="" name="calendarnum" id="calendarnum" />
             </div>
@@ -182,19 +170,30 @@
 
     <script>
         $(document).ready(function () {
-
+            //hide popup layer
             $("#layerPopup").hide();
 
-            $("tbody tr td").click(function () {
+            $('[id="appearDate"]').click(function () {
                 if ($(this).text()!=""){
+
                     //to remove space
                     var showDay=$.trim($(this).text());
-                    //get only day(i) value
+                    //get only day(i) value   //using split, [0] is first value
                     showDay=showDay.split(" ")[0];
 
+                    //nowday val change to showDay
                     $("#nowday").val(showDay);
                     /*alert($("#year").val()+"-"+$("#month").val()+"-"+$(this).text());*/
+
+                    //to remove title and content
+                    $("#title").val("");
+                    $("#content").val("");
+
+                    //if you've updated, then change to saveContents again
+                    $("#sendData").attr('action', 'saveContents');
+                    $(".popupbtn").html("Save");
                     $("#layerPopup").dialog();
+
                     //to operate month
                     var showMonth=parseInt($("#month").val())+1;
                     $("#ui-id-1").text($("#year").val()+"-"+showMonth+"-"+showDay);
@@ -203,31 +202,49 @@
 
             $(".contentstitle").click(function () {
                 if ($(this).text()!=null){
-
-                    console.log($(this).children().val());
-                    console.log($(this).children().eq(1).val());
+                    console.log("double click update");
 
                     //change dialog title and content
                     $("#title").val($.trim($(this).text()));
                     $("#content").val($(this).children().val());
+                    //eq(1) - second value
                     $("#calendarnum").val($(this).children().eq(1).val());
 
                     //change form tag action to updateContets
                     $("#sendData").attr('action', 'updateContents');
-                    $(".popupbtn").html("UPDATE");
+                    $(".popupbtn").html("Update");
 
+                    //show layer popup
+                    $("#layerPopup").dialog();
                 }
+            });
+
+            //Double Click Event
+            $(".contentstitle").dblclick(function (event) {
+                //get calendarnum from hidden input
+                var deleteCalNum=$(this).children().eq(1).val();
+                console.log("deleteCalNum : "+deleteCalNum);
+                //set onclick attribute
+                var sendAttr="location='deleteContent?calendarnum="+deleteCalNum+"'";
+                //change form tag action to delete
+                $(".popupbtn").attr('type', 'button');
+                $(".popupbtn").html("Delete");
+
+                //add onclick attr to popup button
+                $(".popupbtn").attr('onclick', sendAttr);
+
             });
 
             $("tbody tr td").each(function (index, element) {
                 /*console.log(index+"  "+$(element).text());*/
-                console.log(${calBean.day});
+                //if calBean.day and "day(i)" are same, add style
                 if ($(element).text()==${calBean.day}){
                     $(element).addClass("todayStyle");
                 }
             });
 
             $("tbody tr td").hover(function () {
+                //mouse over event, if mouse left the 'day' element, the color is none
                 if ($(this).text()!=""){
                     //console.log($(this).text());
                     $(this).css("background-color", "#E8F7FA");

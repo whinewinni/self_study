@@ -12,5 +12,6 @@ public interface CalendarServiceInterface {
     void insertCalendarContent(CalendarTable calendarTable);
     List<CalendarTable> listCalendartitle(int year, int month);
     void updateContents(CalendarTable calendarTable);
+    void  deleteContent(int calendarnum);
 
 } //end CalendarServiceInterface interface

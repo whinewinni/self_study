@@ -70,14 +70,22 @@ public class CalendarServiceImple implements CalendarServiceInterface{
     private CalendarRepository calendarRepository;
 
     public void insertCalendarContent(CalendarTable calendarTable) {
+        //for sending calendarTable to insertContents method in Repository
         calendarRepository.insertContents(calendarTable);
     }
 
     public List<CalendarTable> listCalendartitle(int year, int month) {
+        //for sending year and month to listAll method in Repository
         return calendarRepository.listAll(year, month);
     }
 
     public void updateContents(CalendarTable calendarTable) {
+        //for sending calendarTable to update method in Repository
         calendarRepository.update(calendarTable);
+    }
+
+    public void deleteContent(int calendarnum) {
+        //for sending calendarnum to delete method in Repository
+        calendarRepository.delete(calendarnum);
     }
 } //end CalendarServiceImple class

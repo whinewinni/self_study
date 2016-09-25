@@ -21,45 +21,73 @@ public class CalendarRepository {
 
     public void insertContents(CalendarTable calendarTable){
         Session session=sessionFactory.openSession();
-        Transaction transaction=session.beginTransaction();
-        session.save(calendarTable);
-        session.getTransaction().commit();
-        if (session!=null){
+        try {
+            Transaction transaction=session.beginTransaction();
+            session.save(calendarTable);
+            session.getTransaction().commit();
+        }catch (Exception e){
+            System.out.println("CalendarRepository insertContents Exception");
+            e.printStackTrace();
+        }finally {
             session.close();
-        }
-    }
+        } //end try catch
+    } //end of insertContents method
 
     public List<CalendarTable> listAll(int year, int month){
         Session session=sessionFactory.openSession();
-        session.beginTransaction();
-        Query query=session.createQuery("from CalendarTable where year=:year and month=:month");
-        query.setParameter("year" , year);
-        query.setParameter("month" , month);
-        List<CalendarTable> list=query.list();
-        session.getTransaction().commit();
-        if (session!=null){
+        List<CalendarTable> list=null;
+        try {
+            session.beginTransaction();
+            Query query=session.createQuery("from CalendarTable where year=:year and month=:month");
+            query.setParameter("year" , year);
+            query.setParameter("month" , month);
+            list=query.list();
+            session.getTransaction().commit();
+        }catch (Exception e){
+            System.out.println("CalendarRepository listAll Exception");
+            e.printStackTrace();
+        }finally {
             session.close();
-        }
+        } //end try catch
         return list;
-    }
+    } //end listAll method
 
     public void update(CalendarTable calendarTable){
         Session session=sessionFactory.openSession();
-        session.beginTransaction();
-        String updateQuery="UPDATE CalendarTable set title=:title, content=:content WHERE calendarnum=:calendarnum";
-        Query query=session.createQuery(updateQuery);
-        query.setParameter("title", calendarTable.getTitle());
-        query.setParameter("content", calendarTable.getContent());
-        query.setParameter("calendarnum", calendarTable.getCalendarnum());
-        int q=query.executeUpdate();
-        System.out.println(q);
-        //session.update(calendarTable);
-        session.getTransaction().commit();
-        if (session!=null){
+        try {
+            session.beginTransaction();
+            String updateQuery="UPDATE CalendarTable set title=:title, content=:content WHERE calendarnum=:calendarnum";
+            Query query=session.createQuery(updateQuery);
+            query.setParameter("title", calendarTable.getTitle());
+            query.setParameter("content", calendarTable.getContent());
+            query.setParameter("calendarnum", calendarTable.getCalendarnum());
+            query.executeUpdate();
+            //session.update(calendarTable);
+            session.getTransaction().commit();
+        }catch (Exception e){
+            System.out.println("CalendarRepository update Exception");
+            e.printStackTrace();
+        }finally {
             session.close();
-        }
-    }
+        } //end try catch
+    } //end update method
 
+    public void delete(int calendarnum){
+        Session session=sessionFactory.openSession();
+        try {
+            session.beginTransaction();
+            String deleteQuery="DELETE CalendarTable WHERE calendarnum=:calendarnum";
+            Query query=session.createQuery(deleteQuery);
+            query.setParameter("calendarnum", calendarnum);
+            int q=query.executeUpdate();
+            session.getTransaction().commit();
+        }catch (Exception e){
+            System.out.println("CalendarRepository Delete error");
+            e.printStackTrace();
+        }finally {
+            session.close();
+        } //end ret catch
+    } //end delete method
 
 
 
