@@ -131,6 +131,7 @@
                                             ${listAll.title}
                                             <input type="hidden" value="${listAll.content}" />
                                             <input type="hidden" value="${listAll.calendarnum}"/>
+                                            <input type="hidden" value="${listAll.day}"/>
                                         </div>
                                     </c:if>
                                 </c:forEach>
@@ -153,10 +154,10 @@
     <div id="layerPopup" style="display: none">
         <form action="saveContents" method="post" id="sendData">
             <div>
-                <input type="text" value="year = ${calBean.year}" name="year"/>
-                <input type="text" value="month = ${calBean.month+1}" name="month"/>
-                <input type="text" value="" name="day"  id="nowday"/><br>
-                <input type="text" value="" name="calendarnum" id="calendarnum" />
+                <input type="text" value="${calBean.year}" name="year"/>
+                <input type="text" value="${calBean.month+1}" name="month"/>
+                <input type="text" value="" name="day" id="nowday"/><br>
+                <input type="text" value="" id="calendarnum" name=""/>
             </div>
             title : <input type="text" value="title" name="title" id="title"/><br>
             contents : <input type="text" value="content" name="content" id="content"/>
@@ -170,6 +171,7 @@
 
     <script>
         $(document).ready(function () {
+
             //hide popup layer
             $("#layerPopup").hide();
 
@@ -192,7 +194,10 @@
                     //if you've updated, then change to saveContents again
                     $("#sendData").attr('action', 'saveContents');
                     $(".popupbtn").html("Save");
-                    $("#layerPopup").dialog();
+                    $("#layerPopup").dialog({
+                        //fix dialog size
+                        width: 400
+                    });
 
                     //to operate month
                     var showMonth=parseInt($("#month").val())+1;
@@ -202,6 +207,9 @@
 
             $(".contentstitle").click(function () {
                 if ($(this).text()!=null){
+                    //add name attribute in calendarnum input text
+                    $("#calendarnum").attr('name','calendarnum');
+
                     console.log("double click update");
 
                     //change dialog title and content
@@ -209,18 +217,23 @@
                     $("#content").val($(this).children().val());
                     //eq(1) - second value
                     $("#calendarnum").val($(this).children().eq(1).val());
+                    $("#nowday").val($(this).children().eq(2).val());
 
                     //change form tag action to updateContets
                     $("#sendData").attr('action', 'updateContents');
                     $(".popupbtn").html("Update");
 
                     //show layer popup
-                    $("#layerPopup").dialog();
+                    $("#layerPopup").dialog({
+                        //fix dialog size
+                        width: 400
+                    });
                 }
             });
 
-            //Double Click Event
+            //Double Click Event (Delete)
             $(".contentstitle").dblclick(function (event) {
+
                 //get calendarnum from hidden input
                 var deleteCalNum=$(this).children().eq(1).val();
                 console.log("deleteCalNum : "+deleteCalNum);
