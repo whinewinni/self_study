@@ -69,9 +69,14 @@ public class CalendarServiceImple implements CalendarServiceInterface{
     @Autowired
     private CalendarRepository calendarRepository;
 
-    public void insertCalendarContent(CalendarTable calendarTable) {
+    /*public void insertCalendarContent(CalendarTable calendarTable) {
         //for sending calendarTable to insertContents method in Repository
         calendarRepository.insertContents(calendarTable);
+    }*/
+    public int insertCalendarContent(CalendarTable calendarTable) {
+        //for sending calendarTable to insertContents method in Repository
+        calendarRepository.insertContents(calendarTable);
+        return calendarRepository.getSeq();
     }
 
     public List<CalendarTable> listCalendartitle(int year, int month) {
@@ -87,5 +92,9 @@ public class CalendarServiceImple implements CalendarServiceInterface{
     public void deleteContent(int calendarnum) {
         //for sending calendarnum to delete method in Repository
         calendarRepository.delete(calendarnum);
+    }
+
+    public int getSeqInsetMethod(CalendarTable calendarTable) {
+        return calendarRepository.getSqlInsertQuery(calendarTable);
     }
 } //end CalendarServiceImple class

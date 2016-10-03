@@ -8,6 +8,7 @@ import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import javax.persistence.EntityManager;
 import java.util.List;
 
 /**
@@ -88,6 +89,54 @@ public class CalendarRepository {
             session.close();
         } //end ret catch
     } //end delete method
+
+    public int getSeq(){
+        int getNowSeq=0;
+        Session session=sessionFactory.openSession();
+        try{
+            session.beginTransaction();
+            String currvalSeq="select calendarTable_seq.CURRVAL as calendarnum from dual";
+            Query query=session.createQuery(currvalSeq);
+            List tempList=query.list();
+            getNowSeq=(Integer)tempList.get(0);
+            session.getTransaction().commit();
+        }catch (Exception e){
+            System.out.println("getSeq Exception");
+            e.printStackTrace();
+        }finally {
+            session.close();
+        }
+        return getNowSeq;
+    }
+
+
+    public int getSqlInsertQuery(CalendarTable calendarTable){
+        int getNowSeq=0;
+        Session session=sessionFactory.openSession();
+        try{
+            session.beginTransaction();
+            session.save(calendarTable);
+           /* String currvalSeq="select calendarTable_seq.CURRVAL as calendarnum from Dual";
+            Query query=session.createQuery(currvalSeq);
+            List tempList=query.list();
+            getNowSeq=(Integer)tempList.get(0);*/
+           getNowSeq = calendarTable.getCalendarnum();
+
+            System.out.println(calendarTable.getCalendarnum());
+            System.out.println(calendarTable.getCalendarnum());
+            session.getTransaction().commit();
+            System.out.println(calendarTable.getCalendarnum());
+            System.out.println(calendarTable.getCalendarnum());
+        }catch (Exception e){
+            System.out.println("getSqlInsertQuery Exception");
+            e.printStackTrace();
+        }finally {
+            session.close();
+        }
+        return getNowSeq;
+    }
+
+
 
 
 

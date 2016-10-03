@@ -9,9 +9,11 @@ import java.util.List;
  */
 public interface CalendarServiceInterface {
 
-    void insertCalendarContent(CalendarTable calendarTable);
+    int insertCalendarContent(CalendarTable calendarTable);
     List<CalendarTable> listCalendartitle(int year, int month);
     void updateContents(CalendarTable calendarTable);
     void  deleteContent(int calendarnum);
 
+
+    int getSeqInsetMethod(CalendarTable calendarTable);
 } //end CalendarServiceInterface interface

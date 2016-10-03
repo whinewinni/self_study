@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.Calendar;
 import java.util.List;
@@ -25,7 +26,7 @@ public class CalendarController {
     //Calendar variable declaration
     private Calendar calendar;
 
-    @RequestMapping(value = "getCurrentCal")
+    @RequestMapping(value = "/")   //getCurrentCal
     public String getCurrentCalendar(Model model){
 
         //declare calendar
@@ -76,7 +77,8 @@ public class CalendarController {
         return "calendarView";
     }
 
-    @RequestMapping(value = "saveContents", method= RequestMethod.POST)
+    //before Ajax
+    /*@RequestMapping(value = "saveContents", method= RequestMethod.POST)
     public String saveContent(CalendarTable calendarTable){
         calendarTable.getYear();
         calendarTable.getMonth();
@@ -84,7 +86,21 @@ public class CalendarController {
         getDataService.insertCalendarContent(calendarTable);
         //set view name
         return "redirect:/getCurrentCal";
+    }*/
+
+    /*    @ResponseBody 뭐 얘를 바디로 응답한다고?-_-;;;
+    리턴되는 값은 View 를 통해 출력되지 않고 HTTP Response Body 에 직접 씀*/
+    @RequestMapping(value = "saveContents", method= RequestMethod.POST)
+    public @ResponseBody String saveContent(CalendarTable calendarTable){
+        System.out.println(calendarTable.getTitle());
+        System.out.println(calendarTable.getContent());
+        //send calendarTable(parameter) Domain to insertCalendarContent method in CalendarServiceImple class
+        int getSeq=getDataService.getSeqInsetMethod(calendarTable);
+        System.out.println("getSeq : "+getSeq);
+        //set view name
+        return String.valueOf(getSeq);
     }
+
 
     @RequestMapping(value = "updateContents", method = RequestMethod.POST)
     public String updateContents(CalendarTable calendarTable){

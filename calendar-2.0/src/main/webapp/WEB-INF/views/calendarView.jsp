@@ -154,14 +154,14 @@
     <div id="layerPopup" style="display: none">
         <form action="saveContents" method="post" id="sendData">
             <div>
-                <input type="text" value="${calBean.year}" name="year"/>
-                <input type="text" value="${calBean.month+1}" name="month"/>
+                <input type="text" value="${calBean.year}" name="year" id="v_year"/>
+                <input type="text" value="${calBean.month+1}" name="month" id="v_month"/>
                 <input type="text" value="" name="day" id="nowday"/><br>
                 <input type="text" value="" id="calendarnum" name=""/>
             </div>
             title : <input type="text" value="title" name="title" id="title"/><br>
             contents : <input type="text" value="content" name="content" id="content"/>
-            <button type="submit" class="popupbtn">Save</button>
+            <button type="button" class="popupbtn" id="insertData">Save</button>
         </form>
     </div>
 
@@ -171,6 +171,40 @@
 
     <script>
         $(document).ready(function () {
+            //insertData (using Ajax)
+            $("#insertData").click(function () {
+
+                var year=$("#v_year").val();
+                var month=$("#v_month").val();
+                var day=$("#nowday").val();
+                var title=$("#title").val();
+                var content=$("#content").val()
+
+
+                $.ajax({
+                    type :'post',
+                    url: '/saveContents',  /*'/'이거 줘야함*/
+                    data : {
+                        year : year,
+                        month :month,
+                        day :day,
+                        title : title,
+                        content : content
+                    },
+                    success: function(data){
+                        alert(data);
+
+                        //창끄기
+                        $("#layerPopup").hide();
+
+
+
+                    },
+                    error: function (e) {
+                        console.log(e.responseText);
+                    }
+                });
+            });
 
             //hide popup layer
             $("#layerPopup").hide();

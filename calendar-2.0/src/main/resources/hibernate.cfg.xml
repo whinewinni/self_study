@@ -5,5 +5,6 @@
 <hibernate-configuration>
     <session-factory>
         <mapping class="or.whine.domain.CalendarTable"/>
+        <mapping class="or.whine.domain.Dual"/>
     </session-factory>
 </hibernate-configuration>
