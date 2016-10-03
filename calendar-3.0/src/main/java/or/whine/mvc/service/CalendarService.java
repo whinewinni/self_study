@@ -22,8 +22,7 @@ public class CalendarService implements CalendarServiceInterface{
     }
 
     public CalendarTable getCalendarListONE() {
-        calendarRepository.getCalendarListONE();
-        return null;
+        return calendarRepository.getCalendarListONE();
     }
 
     /*-----------------------------------------------------------------------------------------*/

@@ -1,6 +1,7 @@
 package or.whine.domain;
 
 
+
 import javax.persistence.*;
 import java.util.Date;
 
@@ -9,8 +10,11 @@ import java.util.Date;
  */
 @Entity
 @NamedQueries({
-        @NamedQuery(name = "getCalendarListALL", query = "SELECT calendarnum, title, content, year, month, day, scheduleTime FROM CalendarTable ORDER BY calendarnum"),
-        @NamedQuery(name = "getCalendarListONE", query = "SELECT calendarnum, title, content, year, month, day, scheduleTime FROM CalendarTable WHERE calendarnum=?1")
+        /*@NamedQuery(name = "getCalendarListALL", query = "SELECT calendarnum, title, content, year, month, day, scheduleTime FROM CalendarTable ORDER BY calendarnum"),
+        @NamedQuery(name = "getCalendarListONE", query = "SELECT calendarnum, title, content, year, month, day, scheduleTime FROM CalendarTable WHERE calendarnum=?1")*/
+
+        @NamedQuery(name = "getCalendarListALL", query = "SELECT ctall FROM CalendarTable AS ctall ORDER BY calendarnum"),
+        @NamedQuery(name = "getCalendarListONE", query = "SELECT ctone FROM CalendarTable AS ctone WHERE calendarnum=?1")
 })
 @Table(name = "CalendarTable")
 public class CalendarTable {

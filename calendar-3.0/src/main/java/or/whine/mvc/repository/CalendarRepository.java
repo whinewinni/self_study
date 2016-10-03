@@ -24,6 +24,6 @@ public class CalendarRepository {
 
     @Transactional
     public CalendarTable getCalendarListONE(){
-        return (CalendarTable) entityManager.createNamedQuery("getCalendarListONE").setParameter(1, 37).getResultList();
+        return (CalendarTable) entityManager.createNamedQuery("getCalendarListONE").setParameter(1, 37).getSingleResult();
     }
 } //end of CalendarRepository class

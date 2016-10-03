@@ -21,17 +21,16 @@ public class CalendarController {
 
     @RequestMapping(value = "/a")
     public String uiTestMethod(Model model){
-
+        System.out.println("Log1");
         CalendarTable calendarTable=calendarServiceInterface.getCalendarListONE();
         model.addAttribute("TestList", calendarTable);
-
 
         return "calendarView";
     }
 
     @RequestMapping(value = "saveTestRequestMapping", method = RequestMethod.POST)
     public String saveTest(Model model, CalendarTable calendarTable) {
-        System.out.println("Log 01");
+        /*System.out.println("Log 01");*/
         calendarTable.setScheduleTime(new Date());
         calendarServiceInterface.saveTest(calendarTable);
         return "redirect:/a";
