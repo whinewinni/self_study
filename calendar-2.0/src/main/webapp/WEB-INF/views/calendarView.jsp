@@ -65,7 +65,7 @@
             font-weight: bold;
             background-color: #e7e7e7;
         }
-        .contentstitle{
+        #contentstitle{
             width: 100%;
             font-size:20%;
             background-color: #e7e7e7;
@@ -123,11 +123,11 @@
                             <div id="appearDate" style="height: 50%">
                                 ${i}<br>
                             </div>
-                            <div id="appearTitle" style="height: 50%">
+                            <div id="appearTitle${i}" style="height: 50%">
                                 <c:forEach var="listAll" items="${listAll}">
                                     <%--if i is same with listAll.day, then shows the title--%>
                                     <c:if test="${i==listAll.day}">
-                                        <div class="contentstitle">
+                                        <div id="contentstitle">
                                             ${listAll.title}
                                             <input type="hidden" value="${listAll.content}" />
                                             <input type="hidden" value="${listAll.calendarnum}"/>
@@ -191,12 +191,21 @@
                         title : title,
                         content : content
                     },
-                    success: function(data){
-                        alert(data);
+                    success: function(calendarNum_seq){
+                        //Sequence Number
+                        /*alert(calendarNum_seq);*/
 
                         //창끄기
-                        $("#layerPopup").hide();
+                        $("#layerPopup").dialog("close");
 
+                        //console.log(title);
+
+                        $("#contentstitle").html();
+
+                        var getappearTitleId="#appearTitle"+day;
+                        console.log("getappearTitleId : "+getappearTitleId);
+                        console.log($(getappearTitleId).html());
+                        alert($(getappearTitleId).html());
 
 
                     },
@@ -239,7 +248,7 @@
                 }
             });
 
-            $(".contentstitle").click(function () {
+            $("#contentstitle").click(function () {
                 if ($(this).text()!=null){
                     //add name attribute in calendarnum input text
                     $("#calendarnum").attr('name','calendarnum');
@@ -266,7 +275,7 @@
             });
 
             //Double Click Event (Delete)
-            $(".contentstitle").dblclick(function (event) {
+            $("#contentstitle").dblclick(function (event) {
 
                 //get calendarnum from hidden input
                 var deleteCalNum=$(this).children().eq(1).val();
