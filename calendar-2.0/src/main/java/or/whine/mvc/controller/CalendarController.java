@@ -88,7 +88,7 @@ public class CalendarController {
         return "redirect:/getCurrentCal";
     }*/
 
-    /*    @ResponseBody 뭐 얘를 바디로 응답한다고?-_-;;;
+    /*    @ResponseBody 바디로 응답;
     리턴되는 값은 View 를 통해 출력되지 않고 HTTP Response Body 에 직접 씀*/
     @RequestMapping(value = "saveContents", method= RequestMethod.POST)
     public @ResponseBody String saveContent(CalendarTable calendarTable){
@@ -97,7 +97,7 @@ public class CalendarController {
         //send calendarTable(parameter) Domain to insertCalendarContent method in CalendarServiceImple class
         int getSeq=getDataService.getSeqInsetMethod(calendarTable);
         System.out.println("getSeq : "+getSeq);
-        //set view name
+
         return String.valueOf(getSeq);
     }
 

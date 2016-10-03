@@ -122,11 +122,8 @@ public class CalendarRepository {
             getNowSeq=(Integer)tempList.get(0);*/
            getNowSeq = calendarTable.getCalendarnum();
 
-            System.out.println(calendarTable.getCalendarnum());
-            System.out.println(calendarTable.getCalendarnum());
             session.getTransaction().commit();
-            System.out.println(calendarTable.getCalendarnum());
-            System.out.println(calendarTable.getCalendarnum());
+
         }catch (Exception e){
             System.out.println("getSqlInsertQuery Exception");
             e.printStackTrace();

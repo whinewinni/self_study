@@ -180,7 +180,7 @@
                 var title=$("#title").val();
                 var content=$("#content").val()
 
-
+                //ajax - updating parts of a web page, without reloading the whole page
                 $.ajax({
                     type :'post',
                     url: '/saveContents',  /*'/'이거 줘야함*/
