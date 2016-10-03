@@ -9,6 +9,11 @@
 <html>
 <head>
     <title>WhineWinniCalendar</title>
+        <%--Bootstrap lib--%>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
     <style>
         /*Today Button*/
         #getTodayBtn{
@@ -18,10 +23,16 @@
             color: #b4dad2;
         }
         /*calendar table*/
-        table{
+        .table, .table-sm{
             border: 5px solid #b4dad2;
-            border-radius: 10px;
+            border-radius: 10px !important;
             background-color: #b4dad2;
+            width: inherit;
+            height: inherit;
+            margin: 10px;
+        }
+        .table th{
+            text-align: center;
         }
         th{
             background-color: #b4dad2;
@@ -32,7 +43,7 @@
             padding: 5px;
             width: 90px
         }
-        #weekday #calendarTitle{
+        #weekday, #calendarTitle{
             color: white;
         }
         a {
@@ -43,9 +54,9 @@
 </head>
 <body>
 
-<table>
+<table class="table table-sm">
     <thead>
-        <tr id="calendarTitle" class="table table-sm">
+        <tr id="calendarTitle">
             <th colspan="5">2016년 10월</th>
             <th colspan="2">
                 <a>←</a>
@@ -74,21 +85,30 @@
             <td></td>
         </tr>
     </tbody>
-    <tfoot>
+    <%--add buttons later.--%>
+    <%--<tfoot>
         <tr>
             <td colspan="7"></td>
         </tr>
-    </tfoot>
+    </tfoot>--%>
 </table>
 
 
-<link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
-<%--
-Bootstrap lib
- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
---%>
+<div>
+    <form action="saveTestRequestMapping" method="post">
+        <input type="text" name="title" value=""/>
+        <input type="text" name="content" value=""/>
+        <button type="submit" value="Btn">Btn</button>
+    </form>
+</div>
+
+
+<div>
+    ${TestList.title}<br>
+    ${TestList.content}<br>
+    ${TestList.scheduleTime}<br>
+
+</div>
 
 </body>
 </html>
