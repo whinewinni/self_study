@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
 
 /**
  * Created by Winni on 2016-10-03.
@@ -17,15 +19,33 @@ public class CalendarService implements CalendarServiceInterface{
     @Autowired
     private CalendarRepository calendarRepository;
 
-    public void saveTest(CalendarTable calendarTable) {
+    /*-------------------------------------Testing CODE----------------------------------------*/
+    /*public void saveTest(CalendarTable calendarTable) {
         calendarRepository.saveTest(calendarTable);
-    }
+    }*/
 
     public CalendarTable getCalendarListONE() {
         return calendarRepository.getCalendarListONE();
     }
-
     /*-----------------------------------------------------------------------------------------*/
+
+    public List<CalendarTable> getCalendarListALL(int year, int month) {
+        return calendarRepository.getcalendarListAll(year, month);
+    }
+
+    public int saveContent(CalendarTable calendarTable) {
+        calendarTable.setScheduleTime(new Date());
+        return calendarRepository.saveContent(calendarTable);
+    }
+
+    public void updateCotent(CalendarTable calendarTable) {
+        calendarRepository.updateContent(calendarTable);
+    }
+
+    public void deleteContent(int calendarnum) {
+
+    }
+
 
     public CalendarBean getCalendar(int year, int month){
 
@@ -78,7 +98,5 @@ public class CalendarService implements CalendarServiceInterface{
         //vo를 넘겨줌
         return calendarBean;
     }
-
-
 
 } //end of CalendarService class

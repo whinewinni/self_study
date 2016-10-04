@@ -1,7 +1,5 @@
 package or.whine.domain;
 
-
-
 import javax.persistence.*;
 import java.util.Date;
 
@@ -10,23 +8,23 @@ import java.util.Date;
  */
 @Entity
 @NamedQueries({
-        /*@NamedQuery(name = "getCalendarListALL", query = "SELECT calendarnum, title, content, year, month, day, scheduleTime FROM CalendarTable ORDER BY calendarnum"),
-        @NamedQuery(name = "getCalendarListONE", query = "SELECT calendarnum, title, content, year, month, day, scheduleTime FROM CalendarTable WHERE calendarnum=?1")*/
+        @NamedQuery(name = "getCalendarListALL", query = "SELECT ct FROM CalendarTable AS ct WHERE ct.year=?1 AND ct.month=?2"),
+        @NamedQuery(name = "getCalendarListONE", query = "SELECT ct FROM CalendarTable AS ct WHERE ct.calendarnum=?1")
 
-        @NamedQuery(name = "getCalendarListALL", query = "SELECT ctall FROM CalendarTable AS ctall ORDER BY calendarnum"),
-        @NamedQuery(name = "getCalendarListONE", query = "SELECT ctone FROM CalendarTable AS ctone WHERE calendarnum=?1")
+        /*@NamedQuery(name = "getCalendarListALL", query = "SELECT ctall FROM CalendarTable AS ctall ORDER BY calendarnum"),
+        @NamedQuery(name = "getCalendarListONE", query = "SELECT ctone FROM CalendarTable AS ctone WHERE calendarnum=?1")*/
 })
 @Table(name = "CalendarTable")
 public class CalendarTable {
-/*    create table calendarTable(
+    /*create table calendarTable(
             calendarnum number primary key,
             title varchar(100) not null,
-    content clob,
-    year number(10),
-    month number(10),
-    day number(10),
-    scheduleTime date
-  );*/
+            content clob,
+            year number(10),
+            month number(10),
+            day number(10),
+            scheduleTime date
+    );*/
     @Id
     @GeneratedValue(generator = "calendarnum")
     @SequenceGenerator(name = "calendarnum", sequenceName = "calendarTable_seq", allocationSize = 1)
