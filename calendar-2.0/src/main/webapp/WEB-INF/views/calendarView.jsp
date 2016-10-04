@@ -178,7 +178,7 @@
                 var month=$("#v_month").val();
                 var day=$("#nowday").val();
                 var title=$("#title").val();
-                var content=$("#content").val()
+                var content=$("#content").val();
 
                 //ajax - updating parts of a web page, without reloading the whole page
                 $.ajax({

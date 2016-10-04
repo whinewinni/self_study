@@ -120,7 +120,7 @@ public class CalendarRepository {
             Query query=session.createQuery(currvalSeq);
             List tempList=query.list();
             getNowSeq=(Integer)tempList.get(0);*/
-           getNowSeq = calendarTable.getCalendarnum();
+            getNowSeq = calendarTable.getCalendarnum();
 
             session.getTransaction().commit();
 
