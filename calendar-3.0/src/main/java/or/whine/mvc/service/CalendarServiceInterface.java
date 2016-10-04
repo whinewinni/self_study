@@ -10,7 +10,7 @@ import java.util.List;
 public interface CalendarServiceInterface {
     /*-------------------------------------Testing CODE----------------------------------------*/
     /*void saveTest(CalendarTable calendarTable);*/
-    CalendarTable getCalendarListONE();
+    CalendarTable getCalendarListONE(int calendarnum);
     /*-----------------------------------------------------------------------------------------*/
 
     List<CalendarTable> getCalendarListALL(int year, int month);

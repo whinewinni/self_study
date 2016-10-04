@@ -24,8 +24,8 @@ public class CalendarService implements CalendarServiceInterface{
         calendarRepository.saveTest(calendarTable);
     }*/
 
-    public CalendarTable getCalendarListONE() {
-        return calendarRepository.getCalendarListONE();
+    public CalendarTable getCalendarListONE(int calendarnum) {
+        return calendarRepository.getCalendarListONE(calendarnum);
     }
     /*-----------------------------------------------------------------------------------------*/
 
@@ -43,6 +43,11 @@ public class CalendarService implements CalendarServiceInterface{
     }
 
     public void deleteContent(int calendarnum) {
+        System.out.println("Log 01");
+        CalendarTable calDomain=calendarRepository.getCalendarListONE(calendarnum);
+        System.out.println("Log 02");
+        calendarRepository.deletecontent(calDomain);
+        System.out.println("Log 03");
 
     }
 

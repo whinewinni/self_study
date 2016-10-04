@@ -25,8 +25,9 @@ public class CalendarRepository {
     }*/
 
     @Transactional
-    public CalendarTable getCalendarListONE(){
-        return (CalendarTable) entityManager.createNamedQuery("getCalendarListONE").setParameter(1, 37).getSingleResult();
+    public CalendarTable getCalendarListONE(int calendarnum){
+        System.out.println("Log 04");
+        return (CalendarTable) entityManager.createNamedQuery("getCalendarListONE").setParameter(1, calendarnum).getSingleResult();
     }
     /*-----------------------------------------------------------------------------------------*/
 
@@ -47,6 +48,7 @@ public class CalendarRepository {
 
     @Transactional
     public void deletecontent(CalendarTable calendarTable){
+        System.out.println("Log 06");
         entityManager.remove(calendarTable);
     }
 

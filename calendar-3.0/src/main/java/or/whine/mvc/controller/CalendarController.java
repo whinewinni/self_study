@@ -27,14 +27,14 @@ public class CalendarController {
 
 
     /*-------------------------------------Testing CODE----------------------------------------*/
-    @RequestMapping(value = "/a")
+    /*@RequestMapping(value = "/a")
     public String uiTestMethod(Model model){
         System.out.println("Log1");
         CalendarTable calendarTable=calendarService.getCalendarListONE();
         model.addAttribute("TestList", calendarTable);
 
         return "calendarView";
-    }
+    }*/
 
     @RequestMapping(value = "saveTestRequestMapping", method = RequestMethod.POST)
     public String saveTest(Model model, CalendarTable calendarTable) {
@@ -121,6 +121,8 @@ public class CalendarController {
     @RequestMapping(value = "deletecontent")
     public @ResponseBody void deleteContent(int calendarnum){
         System.out.println("delete Controller calendarnum - "+calendarnum);
+        calendarService.deleteContent(calendarnum);
+        System.out.println("Log : Delete Done!!!");
     }
 
 
