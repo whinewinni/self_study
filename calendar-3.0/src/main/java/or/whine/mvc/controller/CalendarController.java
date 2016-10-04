@@ -23,8 +23,7 @@ import java.util.List;
 public class CalendarController {
 
     @Autowired
-    private CalendarService calendarService;
-
+    private CalendarServiceInterface calendarService;
 
     /*-------------------------------------Testing CODE----------------------------------------*/
     /*@RequestMapping(value = "/a")
@@ -118,7 +117,7 @@ public class CalendarController {
         calendarService.updateCotent(calendarTable);
     }
 
-    @RequestMapping(value = "deletecontent")
+    @RequestMapping(value = "/deletecontent")
     public @ResponseBody void deleteContent(int calendarnum){
         System.out.println("delete Controller calendarnum - "+calendarnum);
         calendarService.deleteContent(calendarnum);

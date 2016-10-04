@@ -65,6 +65,12 @@
             top: 50%;
             margin-top: -250px;
         }*/
+        #contentstitle{
+            width: 100%;
+            font-size:20%;
+            background-color: #e7e7e7;
+            text-align: right;
+        }
     </style>
 </head>
 <body>
@@ -112,13 +118,13 @@
 
                         <td id="focusToday">
                             <div id="appearDate" style="height: 50%">
-                                    ${i}<br><p id="showTitle${i}"></p>
+                                    ${i}<br>
                             </div>
                             <div id="appearTitle${i}" style="height: 50%">
                                 <c:forEach var="listAll" items="${listAll}">
                                     <%--if i is same with listAll.day, then shows the title--%>
                                     <c:if test="${i==listAll.day}">
-                                        <div id="contentstitle">
+                                        <div class="contentstitle">
                                             <p id="showTitle${i}">${listAll.title}</p>
                                             <input type="hidden" value="${listAll.content}" />
                                             <input type="hidden" value="${listAll.calendarnum}"/>
@@ -159,7 +165,6 @@
                 <!-- Modal content-->
                 <div class="modal-content">
                     <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal">&times;</button>
                         <h4 class="modal-title" id="showModalDate">날짜표시</h4>
                     </div>
                     <div class="modal-body">
@@ -176,7 +181,7 @@
                         <button type="button" class="btn btn-default" id="contentsSaveBtn" style="visibility: visible">Save</button>
                         <button type="button" class="btn btn-default" id="contentsUpdateBtn" style="display: none">Update</button> <%--mydiv.style.visibility = "visible";--%>
                         <button type="button" class="btn btn-default" id="contentsDaeleteBtn" style="display: none">Delete</button>
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal" id="modalCloseBtn">Close</button>
                     </div>
                 </div>
             </div>
@@ -200,11 +205,34 @@
     <%------------------------------------------------------------------------------------------------------------------%>
 
     <script>
+
         $(document).ready(function () {
             //SELECT ONE
-            $("#contentstitle").click(function () {
+
+            $(document).on('click', '.contentstitle',function () {
                 if ($(this).text()!=null){
-                    /*alert($.trim($(this).text()));*/
+                    //show modal
+                    $('#myModal').modal('show');
+
+                    //change modal title and content
+                    $("#title").val($.trim($(this).text()));
+                    $("#content").val($(this).children().eq(1).val());
+                    $("#calendarnum").val($(this).children().eq(2).val());
+                    $("#nowday").val($(this).children().eq(3).val());
+
+                    $("#contentsSaveBtn").attr('style', 'display: none');
+                    $("#contentsUpdateBtn").attr('style', 'visibility: visible');
+                    $("#contentsDaeleteBtn").attr('style', 'visibility: visible');
+
+                    //to operate month
+                    var showMonth=parseInt($("#v_month").val())+1;
+                    $("#showModalDate").text($("#v_year").val()+"-"+showMonth+"-"+showDay);
+                }
+            });
+
+            /*$(".contentstitle").click(function () {
+                if ($(this).text()!=null){
+                    /!*alert($.trim($(this).text()));*!/
 
                     //show modal
                     $('#myModal').modal('show');
@@ -224,6 +252,12 @@
                     $("#showModalDate").text($("#v_year").val()+"-"+showMonth+"-"+showDay);
 
                 }
+            });*/
+
+            $("#modalCloseBtn").click(function () {
+                $("#contentsSaveBtn").attr('style', 'visibility: visible');
+                $("#contentsUpdateBtn").attr('style', 'display: none');
+                $("#contentsDaeleteBtn").attr('style', 'display: none');
             });
 
             $("#contentsDaeleteBtn").click(function () {
@@ -317,9 +351,23 @@
                         //hide modal
                         $('#myModal').modal('hide');
 
-                        console.log("day:title = " + day + ", " + title);
-                        /*$(getappearTitleId).append("<div>"+title+"</div>");*/
-                        $("#showTitle"+day).html(title);
+                        var intoHtml="<div class='contentstitle'><p id='showTitle"+day+"'>"+title+"</p><input type='hidden' value='"+content+"'/>" +
+                                "<input type='hidden' value='"+calendarNum_seq+"'/><input type='hidden' value='"+day+"'></div>";
+                        $("#appearTitle"+day).append(intoHtml);
+                        /*$("#showTitle"+day).html(title);*/
+
+
+
+
+
+                        /*
+                                 /!*$("#v_year").val(year);
+                        $("#v_month").val(month);
+                        $("#nowday").val(day);
+                        $("#title").val(title);
+                        $("#content").val(content);*!/
+*/
+
 
                     },
                     error:function (e) {

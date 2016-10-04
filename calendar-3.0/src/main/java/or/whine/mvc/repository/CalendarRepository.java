@@ -11,9 +11,9 @@ import java.util.List;
 /**
  * Created by Winni on 2016-10-03.
  */
-@Repository
+@Repository("CalendarRepository")
 @Transactional
-public class CalendarRepository {
+public class CalendarRepository implements CalendarRepositoryInterface{
 
     @PersistenceContext(unitName = "calendar")
     private EntityManager entityManager;
@@ -49,7 +49,9 @@ public class CalendarRepository {
     @Transactional
     public void deletecontent(CalendarTable calendarTable){
         System.out.println("Log 06");
+        System.out.println(calendarTable.getCalendarnum());
         entityManager.remove(calendarTable);
+        System.out.println("Log 07");
     }
 
 

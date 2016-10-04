@@ -3,6 +3,7 @@ package or.whine.mvc.service;
 import or.whine.bean.CalendarBean;
 import or.whine.domain.CalendarTable;
 import or.whine.mvc.repository.CalendarRepository;
+import or.whine.mvc.repository.CalendarRepositoryInterface;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,11 +14,11 @@ import java.util.List;
 /**
  * Created by Winni on 2016-10-03.
  */
-@Service
+@Service("CalendarService")
 public class CalendarService implements CalendarServiceInterface{
 
     @Autowired
-    private CalendarRepository calendarRepository;
+    private CalendarRepositoryInterface calendarRepository;
 
     /*-------------------------------------Testing CODE----------------------------------------*/
     /*public void saveTest(CalendarTable calendarTable) {
@@ -46,6 +47,8 @@ public class CalendarService implements CalendarServiceInterface{
         System.out.println("Log 01");
         CalendarTable calDomain=calendarRepository.getCalendarListONE(calendarnum);
         System.out.println("Log 02");
+        System.out.println(calDomain.getCalendarnum());
+        System.out.println(calDomain.getTitle());
         calendarRepository.deletecontent(calDomain);
         System.out.println("Log 03");
 

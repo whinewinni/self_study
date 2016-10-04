@@ -1,5 +1,6 @@
 package or.whine.mvc.service;
 
+import or.whine.bean.CalendarBean;
 import or.whine.domain.CalendarTable;
 
 import java.util.List;
@@ -9,7 +10,7 @@ import java.util.List;
  */
 public interface CalendarServiceInterface {
     /*-------------------------------------Testing CODE----------------------------------------*/
-    /*void saveTest(CalendarTable calendarTable);*/
+    CalendarBean getCalendar(int year, int month);
     CalendarTable getCalendarListONE(int calendarnum);
     /*-----------------------------------------------------------------------------------------*/
 
