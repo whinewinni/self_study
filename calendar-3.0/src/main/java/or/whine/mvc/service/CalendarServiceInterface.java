@@ -2,6 +2,7 @@ package or.whine.mvc.service;
 
 import or.whine.bean.CalendarBean;
 import or.whine.domain.CalendarTable;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
@@ -17,5 +18,5 @@ public interface CalendarServiceInterface {
     List<CalendarTable> getCalendarListALL(int year, int month);
     int saveContent(CalendarTable calendarTable);
     void updateCotent(CalendarTable calendarTable);
-    void deleteContent(int calendarnum);
+    boolean deleteContent(int calendarnum) throws Exception;
 }

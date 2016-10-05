@@ -11,7 +11,7 @@ import java.util.List;
 /**
  * Created by Winni on 2016-10-03.
  */
-@Repository("CalendarRepository")
+@Repository
 @Transactional
 public class CalendarRepository implements CalendarRepositoryInterface{
 
@@ -36,18 +36,20 @@ public class CalendarRepository implements CalendarRepositoryInterface{
     public List<CalendarTable> getcalendarListAll(int year, int month){
         return entityManager.createNamedQuery("getCalendarListALL").setParameter(1, year).setParameter(2, month).getResultList();
     }
+
     @Transactional
     public int saveContent(CalendarTable calendarTable) {
         entityManager.persist(calendarTable);
         return calendarTable.getCalendarnum();
     }
+
     @Transactional
     public void updateContent(CalendarTable calendarTable){
         entityManager.merge(calendarTable);
     }
 
     @Transactional
-    public void deletecontent(CalendarTable calendarTable){
+    public void deletecontent(CalendarTable calendarTable) throws Exception {
         System.out.println("Log 06");
         System.out.println(calendarTable.getCalendarnum());
         entityManager.remove(calendarTable);

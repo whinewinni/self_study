@@ -7,9 +7,7 @@ import or.whine.mvc.service.CalendarServiceInterface;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -101,7 +99,7 @@ public class CalendarController {
     /*    @ResponseBody 바디로 응답;
     리턴되는 값은 View 를 통해 출력되지 않고 HTTP Response Body 에 직접 씀*/
     @RequestMapping(value = "saveContents", method= RequestMethod.POST)
-    public @ResponseBody String saveContent(CalendarTable calendarTable){
+    public @ResponseBody String saveContent(@ModelAttribute CalendarTable calendarTable){
         /*System.out.println("calendarTable.getTitle() : "+calendarTable.getTitle());
         System.out.println("calendarTable.getContent() : "+calendarTable.getContent());*/
         //send calendarTable(parameter) Domain to saveContent method in CalendarService class
@@ -117,11 +115,16 @@ public class CalendarController {
         calendarService.updateCotent(calendarTable);
     }
 
-    @RequestMapping(value = "/deletecontent")
-    public @ResponseBody void deleteContent(int calendarnum){
-        System.out.println("delete Controller calendarnum - "+calendarnum);
-        calendarService.deleteContent(calendarnum);
-        System.out.println("Log : Delete Done!!!");
+    @RequestMapping(value = "/deletecontent/{calendarnum}")
+    public @ResponseBody String deleteContent(@PathVariable int calendarnum) throws Exception {
+
+        boolean result = calendarService.deleteContent(calendarnum);
+
+        if(result) {
+            return "error";
+        } else {
+            return "DeleteDone";
+        }
     }
 
 

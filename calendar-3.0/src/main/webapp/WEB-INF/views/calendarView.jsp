@@ -265,10 +265,9 @@
                 var calendarnum=$("#calendarnum").val();
                 $.ajax({
                     /*type:'get',*/
-                    url:'/deletecontent',
-                    data: {calendarnum : calendarnum},
-                    success:function () {
-                        alert("DONE delete");
+                    url:'/deletecontent/' + calendarnum,
+                    success:function (str) {
+                        alert(str);
                         $('#myModal').modal('hide');
                         $("#showTitle"+day).html("");
                     },

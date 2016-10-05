@@ -6,6 +6,7 @@ import or.whine.mvc.repository.CalendarRepository;
 import or.whine.mvc.repository.CalendarRepositoryInterface;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -14,7 +15,7 @@ import java.util.List;
 /**
  * Created by Winni on 2016-10-03.
  */
-@Service("CalendarService")
+@Service
 public class CalendarService implements CalendarServiceInterface{
 
     @Autowired
@@ -43,14 +44,15 @@ public class CalendarService implements CalendarServiceInterface{
         calendarRepository.updateContent(calendarTable);
     }
 
-    public void deleteContent(int calendarnum) {
-        System.out.println("Log 01");
+    @Transactional
+    public boolean deleteContent(int calendarnum) throws Exception {
         CalendarTable calDomain=calendarRepository.getCalendarListONE(calendarnum);
-        System.out.println("Log 02");
-        System.out.println(calDomain.getCalendarnum());
-        System.out.println(calDomain.getTitle());
-        calendarRepository.deletecontent(calDomain);
-        System.out.println("Log 03");
+        if(calDomain == null) {
+            return true;
+        } else {
+            calendarRepository.deletecontent(calDomain);
+            return false;
+        }
 
     }
 

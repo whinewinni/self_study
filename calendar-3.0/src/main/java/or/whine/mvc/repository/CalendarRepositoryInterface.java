@@ -1,6 +1,7 @@
 package or.whine.mvc.repository;
 
 import or.whine.domain.CalendarTable;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
@@ -12,5 +13,5 @@ public interface CalendarRepositoryInterface {
     List<CalendarTable> getcalendarListAll(int year, int month);
     int saveContent(CalendarTable calendarTable);
     void updateContent(CalendarTable calendarTable);
-    void deletecontent(CalendarTable calendarTable);
+    void deletecontent(CalendarTable calendarTable) throws Exception;
 }
