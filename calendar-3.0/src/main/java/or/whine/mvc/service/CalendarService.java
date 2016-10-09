@@ -82,6 +82,7 @@ public class CalendarService implements CalendarServiceInterface{
         }else {
             forFocusDay=1;
         }
+        System.out.println("forFocusDay = "+forFocusDay);
         calendarBean.setDay(forFocusDay);
 
         //1일로 지정, 달은 0부터 시작

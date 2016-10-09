@@ -65,7 +65,7 @@
             top: 50%;
             margin-top: -250px;
         }*/
-        #contentstitle{
+        .contentstitle{
             width: 100%;
             font-size:20%;
             background-color: #e7e7e7;
@@ -208,7 +208,6 @@
 
         $(document).ready(function () {
             //SELECT ONE
-
             $(document).on('click', '.contentstitle',function () {
                 if ($(this).text()!=null){
                     //show modal
@@ -250,7 +249,6 @@
                     //to operate month
                     var showMonth=parseInt($("#v_month").val())+1;
                     $("#showModalDate").text($("#v_year").val()+"-"+showMonth+"-"+showDay);
-
                 }
             });*/
 
@@ -306,7 +304,6 @@
                         $('#myModal').modal('hide');
 
                         $("#showTitle"+day).html(title);
-
                     },
                     error:function (e) {
                         console.log("UPDATE Error - > " +e.responseText);
@@ -355,18 +352,12 @@
                         $("#appearTitle"+day).append(intoHtml);
                         /*$("#showTitle"+day).html(title);*/
 
-
-
-
-
                         /*
                                  /!*$("#v_year").val(year);
                         $("#v_month").val(month);
                         $("#nowday").val(day);
                         $("#title").val(title);
-                        $("#content").val(content);*!/
-*/
-
+                        $("#content").val(content);*!/ */
 
                     },
                     error:function (e) {
@@ -397,10 +388,13 @@
                 $("#showModalDate").text($("#v_year").val()+"-"+showMonth+"-"+showDay);
             });
 
+            $("#focusToday")
+
+
             //today style
             $("tbody tr td").each(function (index, element) {
                 //if calBean.day and "day(i)" are same, add style
-                if ($(element).text()==${calBean.day}){
+                if ($(element).children().eq(0).text()==${calBean.day}){
                     $(element).addClass("todayStyle");
                 }
             });
@@ -409,7 +403,6 @@
             $("tbody tr td").hover(function () {
                 //mouse over event, if mouse left the 'day' element, the color is none
                 if ($(this).text()!=""){
-                    //console.log($(this).text());
                     $(this).css("background-color", "#E8F7FA");
                 }
             }, function () {
