@@ -388,9 +388,6 @@
                 $("#showModalDate").text($("#v_year").val()+"-"+showMonth+"-"+showDay);
             });
 
-            $("#focusToday")
-
-
             //today style
             $("tbody tr td").each(function (index, element) {
                 //if calBean.day and "day(i)" are same, add style
