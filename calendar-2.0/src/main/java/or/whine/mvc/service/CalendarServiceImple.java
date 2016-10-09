@@ -38,6 +38,7 @@ public class CalendarServiceImple implements CalendarServiceInterface{
         }else {
             focusDay=1;
         }
+        System.out.println("focus Today = "+focusDay);
         calendarBean.setDay(focusDay);
 
 
