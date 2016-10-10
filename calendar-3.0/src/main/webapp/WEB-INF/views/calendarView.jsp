@@ -285,17 +285,19 @@
                 var content=$("#content").val();
                 var calendarnum=$("#calendarnum").val();
 
+                var params = {
+                    year : year,
+                    month :month,
+                    day :day,
+                    title : title,
+                    content : content,
+                    calendarnum :calendarnum
+                };
+
                 $.ajax({
                     type:'post',
                     url:'/updateContent',
-                    data : {
-                        year : year,
-                        month :month,
-                        day :day,
-                        title : title,
-                        content : content,
-                        calendarnum :calendarnum
-                    },
+                    data : params,
                     success:function () {
                         /*alert(str);*/
 

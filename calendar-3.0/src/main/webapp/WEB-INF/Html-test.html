@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+</head>
+<body>
+    <table>
+        <tr>
+            <td>A</td>
+            <td><a href="javascript:;" class="btn-delete">X</a></td>
+        </tr>
+        <tr>
+            <td>B</td>
+            <td><a href="javascript:;" class="btn-delete">X</a></td>
+        </tr>
+        <tr>
+            <td>C</td>
+            <td><a href="javascript:;" class="btn-delete">X</a></td>
+        </tr>
+        <tr>
+            <td>D</td>
+            <td><a href="javascript:;" class="btn-delete">X</a></td>
+        </tr>
+    </table>
+
+    <script type="text/javascript">
+        function OnDelete(v) {
+            if(v == 1) {
+                alert("1");
+            }
+
+            if(v == 2) {
+                alert(2);
+            }
+
+            location.href = "html-test2.html";
+        }
+    </script>
+</body>
+</html>

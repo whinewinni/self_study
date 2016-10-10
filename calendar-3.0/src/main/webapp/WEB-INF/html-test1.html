@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <style>
+        /*a tag에 mouse over시 손모양 */
+        .btn-delete { cursor: pointer;}
+    </style>
+</head>
+<body>
+<table>
+    <tr>
+        <td>A</td>
+        <!--a tag안에 class나 사용자 지정tag로 인해 따로 href를 정의해주지 않아도 상관없지만
+        "cursor: pointer" style같은 효과를 보기 위해서는 지정해 주는것이 편리하다.-->
+        <td><a href="#" class="btn-delete" data-seqid="1" enui-seqid="11">X</a></td>
+    </tr>
+    <tr>
+        <td>B</td>
+        <!--name 속성을 이용하여 다른 a tag로 넘어갈 수 있다.-->
+        <td><a name="" href="javascript:;" class="btn-delete" data-seqid="2" enui-seqid="22">X</a></td>
+    </tr>
+    <tr>
+        <td>C</td>
+        <!--data-seqid, enui-seqid는 사용자 지정 tag
+        argument 변수가 필요할 경우 넘어가는 값을 넘겨줄 수 있다.-->
+        <td><a href="javascript:;" class="btn-delete" data-seqid="3" enui-seqid="33">X</a></td>
+    </tr>
+    <tr>
+        <td>D</td>
+        <!--javascript:;는 class나 onclick과 같은 속성으로 이벤트를 지정하기 때문에 안써줘도 상관없지만 써주는 것이 좋으며
+        javascript:;는 실행화면에서 코드가 안보여지가 때문에 사용을 한다.-->
+        <td><a href="javascript:;" class="btn-delete" data-seqid="4" enui-seqid="44">X</a></td>
+    </tr>
+
+    <!--script에 function()으로 값을 넘겨줄때는 항상 ''나 ""을 사용해서 String이나 char로 보내줌..-->
+</table>
+
+<script type="text/javascript">
+    function OnDelete(v) {
+        if(v == 1) {
+            alert("1");
+        }
+        if(v == 2) {
+            alert(2);
+        }
+        /*a tag의 onclick 속성을 script안에서는 아래처럼 사용함*/
+        location.href = "html-test2.html";
+    }
+
+    $(document).ready(function () {
+        $(".btn-delete").click(function() {
+            /*tag 속성을 "data-xxx"와 같이 지정하였으며, 아래처럼 data("xxx")로 값을 받을 수 있다.*/
+            var seq = $(this).data("seqid");
+            console.log( seq );
+
+            /*tag 속성을 임의의 명으로 "enui-xxx"와 같이 지정하였으며, 아래처럼 attr("enui-xxx")로 값을 받을 수 있다.*/
+            var enui_seqid = $(this).attr("enui-seqid");
+            console.log( enui_seqid );
+        });
+    });
+</script>
+</body>
+</html>

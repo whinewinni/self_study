@@ -82,9 +82,9 @@ public class CalendarController {
         int month=calendar.get(Calendar.MONTH);
 
         //get CalendarTable domain from listCalendartitle
-        List<CalendarTable> listAll=calendarService.getCalendarListALL(year, month+1);
+        List<CalendarTable> calendarTableList =calendarService.getCalendarListALL(year, month+1);
         //listAll value is for showing title
-        model.addAttribute("listAll", listAll);
+        model.addAttribute("calendarTableList", calendarTableList);
 
         //give year and month to getDateService after then, get calendarBean
         CalendarBean calendarBean=calendarService.getCalendar(year, month);
