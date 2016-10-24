@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <style>
+        .modal-header, h4, .close {
+            background-color: #b4dad2;
+            color:white !important;
+            text-align: center;
+            font-size: 30px;
+        }
+        .btn-default, .modal-footer {
+            background-color: #b4dad2;
+            color: #575757;
+        }
+        .btn-default:hover{
+            color: white;
+            background-color: rgb(198, 228, 222);
+            border-color: #f5f3f3;
+            font-weight: bold;
+        }
+        h5{
+            font-weight: bold;
+        }
+    </style>
+
+</head>
+<body>
+
+    <button type="button" data-target="#myModal" data-toggle="modal">Modal</button>
+    <div class="modal fade" id="myModal" role="dialog">
+        <div class="modal-dialog">
+
+            <div class="modal-content">
+                <div class="modal-header" style="padding:35px 50px;">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4><span class="glyphicon glyphicon-calendar"/>&nbsp;2016년 10월 25일</h4>
+                </div>
+                <div class="modal-body" style="padding:15px 15px;" data-year="${calBean.year}" data-month="${calBean.month+1}" data-day="" data-calendarnum="">
+                    <div class="list-group">
+                        <a href="#" class="list-group-item ">
+                            <h5 class="list-group-item-heading">List group item heading</h5>
+                            <p class="list-group-item-text">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
+                        </a>
+                        <a href="#" class="list-group-item ">
+                            <h5 class="list-group-item-heading">List group item heading</h5>
+                            <p class="list-group-item-text">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
+                        </a>
+                        <a href="#" class="list-group-item">
+                            <h5 class="list-group-item-heading">List group item heading</h5>
+                            <p class="list-group-item-text">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
+                        </a>
+                    </div>
+                    <button type="button" class="btn btn-default btn-block"><span class="glyphicon glyphicon-floppy-saved"/>&nbsp;새글</button>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default btn-block" data-dismiss="modal" id="modalCloseBtn"><span class="glyphicon glyphicon-log-out"/>&nbsp;Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</body>
+</html>

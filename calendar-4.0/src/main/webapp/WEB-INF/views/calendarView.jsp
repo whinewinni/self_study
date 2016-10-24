@@ -60,8 +60,13 @@
             text-align: center;
             font-size: 30px;
         }
-        .modal-footer {
+        .btn-default, .modal-footer {
             background-color: #b4dad2;
+        }
+        .btn-default:hover{
+            color: white;
+            background-color: #C6E4DE;
+            border-color: #f5f3f3;
         }
         .contentstitle{
             width: 100%;
