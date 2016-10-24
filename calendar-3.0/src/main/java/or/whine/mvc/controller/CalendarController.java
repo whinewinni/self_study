@@ -57,7 +57,7 @@ public class CalendarController {
 
         //get CalendarTable domain from listCalendartitle
         List<CalendarTable> listAll=calendarService.getCalendarListALL(year, month+1);
-        model.addAttribute("listAll", listAll);
+        model.addAttribute("calendarTableList", listAll);
 
         //give year and month to getDateService
         //after then, get calendarVo
@@ -67,7 +67,7 @@ public class CalendarController {
         model.addAttribute("calBean", calendarBean);
 
         //return view name
-        return "calendarView";
+        return "calendarViewModifyVerions";
     }
 
     @RequestMapping(value = "otherMonth")

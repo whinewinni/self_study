@@ -32,7 +32,7 @@
         <td>D</td>
         <!--javascript:;는 class나 onclick과 같은 속성으로 이벤트를 지정하기 때문에 안써줘도 상관없지만 써주는 것이 좋으며
         javascript:;는 실행화면에서 코드가 안보여지가 때문에 사용을 한다.-->
-        <td><a href="javascript:;" class="btn-delete" data-seqid="4" enui-seqid="44">X</a></td>
+        <td><a href="javascript:OnDelete(1);" class="btn-delete" data-seqid="4" enui-seqid="44">X</a></td>
     </tr>
 
     <!--script에 function()으로 값을 넘겨줄때는 항상 ''나 ""을 사용해서 String이나 char로 보내줌..-->
@@ -59,6 +59,9 @@
             /*tag 속성을 임의의 명으로 "enui-xxx"와 같이 지정하였으며, 아래처럼 attr("enui-xxx")로 값을 받을 수 있다.*/
             var enui_seqid = $(this).attr("enui-seqid");
             console.log( enui_seqid );
+
+            var a=$(this).data("seqid", 100);
+            console.log($(this).data("seqid"));
         });
     });
 </script>
