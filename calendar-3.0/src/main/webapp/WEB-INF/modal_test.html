@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <style>
+        .modal-header, h4, .close {
+            background-color: #b4dad2;
+            color:white !important;
+            text-align: center;
+            font-size: 30px;
+        }
+        .btn-default, .modal-footer {
+            background-color: #b4dad2;
+        }
+        .btn-default:hover{
+            color: white;
+            background-color: rgb(198, 228, 222);
+            border-color: #f5f3f3;
+
+        }
+    </style>
+</head>
+<body>
+
+
+
+    <button type="button" data-target="#myModal" data-toggle="modal">Modal</button>
+    <div class="modal fade" id="myModal" role="dialog">
+        <div class="modal-dialog">
+
+            <div class="modal-content">
+                <div class="modal-header" style="padding:35px 50px;">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4><span class="glyphicon glyphicon-calendar"/>&nbsp;날짜</h4>
+                </div>
+                <div class="modal-body" style="padding:40px 50px;" data-year="${calBean.year}" data-month="${calBean.month+1}" data-day="" data-calendarnum="">
+                    <div class="form-group">
+                        <label>&nbsp;<span class="glyphicon glyphicon-tag"></span>&nbsp;Title</label>
+                        <input type="text" class="form-control" value="title" name="title" id="title"/>
+                    </div>
+                    <div class="form-group">
+                        <label>&nbsp;<span class="glyphicon glyphicon-floppy-disk"></span>&nbsp;Content</label>
+                        <input type="text" class="form-control" value="content" name="content" id="content">
+                    </div>
+                    <button type="button" class="btn btn-default btn-block" id="contentsSaveBtn"><span class="glyphicon glyphicon-floppy-saved"/>&nbsp;Save</button>
+                    <button type="button" class="btn btn-default btn-block" id="contentsUpdateBtn"><span class="glyphicon glyphicon-floppy-save"/>&nbsp;Update</button>
+                    <button type="button" class="btn btn-default btn-block" id="contentsDaeleteBtn"><span class="glyphicon glyphicon-floppy-remove"/>&nbsp;Delete</button>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default btn-block" data-dismiss="modal" id="modalCloseBtn"><span class="glyphicon glyphicon-log-out"/>&nbsp;Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</body>
+</html>
