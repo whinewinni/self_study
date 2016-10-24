@@ -1,6 +1,7 @@
 package or.whine.mvc.controller;
 
 import or.whine.bean.CalendarBean;
+import or.whine.domain.CalendarTable;
 import or.whine.mvc.service.CalendarServiceInterface;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -8,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.Calendar;
+import java.util.List;
 
 /**
  * Created by Winni on 2016-10-23.
@@ -37,6 +39,10 @@ public class CalendarController {
         int year=calendar.get(Calendar.YEAR);
         int month=calendar.get(Calendar.MONTH);
 
+        //get CalendarTable domain from getCalendarListAll
+        List<CalendarTable> calendarTables=calendarService.getCalendarListAll(year, month+1);
+        model.addAttribute("calendarTables", calendarTables);
+
         //give year and month to getDateService
         //after then, get calendarVo
         CalendarBean calendarBean=calendarService.getCalendar(year, month);
@@ -58,6 +64,10 @@ public class CalendarController {
         //get year and month from calendar variable
         int year=calendar.get(Calendar.YEAR);
         int month=calendar.get(Calendar.MONTH);
+
+        //get CalendarTable domain from getCalendarListAll
+        List<CalendarTable> calendarTables=calendarService.getCalendarListAll(year, month+1);
+        model.addAttribute("calendarTables", calendarTables);
 
         //give year and month to getDateService after then, get calendarBean
         CalendarBean calendarBean=calendarService.getCalendar(year, month);

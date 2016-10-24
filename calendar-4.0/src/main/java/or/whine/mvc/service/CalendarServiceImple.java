@@ -2,6 +2,8 @@ package or.whine.mvc.service;
 
 import or.whine.bean.CalendarBean;
 import or.whine.domain.CalendarTable;
+import or.whine.mvc.repository.CalendarRepositoryInterface;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Calendar;
@@ -13,9 +15,8 @@ import java.util.List;
 @Service
 public class CalendarServiceImple implements CalendarServiceInterface{
 
-    public List<CalendarTable> getCalendarListAll(int year, int month) {
-        return null;
-    }
+    @Autowired
+    private CalendarRepositoryInterface calendarRepository;
 
     public int saveContent(CalendarTable calendarTable) {
         return 0;
@@ -28,6 +29,10 @@ public class CalendarServiceImple implements CalendarServiceInterface{
     public boolean deleteContent(int calendarnum) throws Exception {
         return false;
    }
+
+    public List<CalendarTable> getCalendarListAll(int year, int month) {
+        return calendarRepository.getCalendarListAll(year, month);
+    }
 
     public CalendarBean getCalendar(int year, int month) {
 
