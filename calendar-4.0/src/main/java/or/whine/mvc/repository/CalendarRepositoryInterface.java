@@ -14,5 +14,6 @@ public interface CalendarRepositoryInterface {
     int saveContent(CalendarTable calendarTable);
     void updateContent(CalendarTable calendarTable);
     void deleteContent(CalendarTable calendarTable) throws Exception;
+    public List<CalendarTable> getListModalCalendarDomainList(CalendarTable calendarTable);
 
 } //end CalendarRepositoryInterface

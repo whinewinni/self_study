@@ -5,6 +5,7 @@ import or.whine.domain.CalendarTable;
 import or.whine.mvc.repository.CalendarRepositoryInterface;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Calendar;
 import java.util.List;
@@ -26,8 +27,26 @@ public class CalendarServiceImple implements CalendarServiceInterface{
 
     }
 
+    public List<CalendarTable> getListModalCalendarDomainList(CalendarTable calendarTable) {
+        return calendarRepository.getListModalCalendarDomainList(calendarTable);
+    }
+
+    public CalendarTable getCalendarListONE(int calendarnum){
+        return calendarRepository.getCalendarListOne(calendarnum);
+    }
+
+    @Transactional
     public boolean deleteContent(int calendarnum) throws Exception {
-        return false;
+        //get calendarDomain through calendarnum(it is from getCalendarListOne)
+        CalendarTable calendarDomain=calendarRepository.getCalendarListOne(calendarnum);
+        //calendarDomain이 null값일경우 true를 리턴하고
+        //null이 아닐 경우에만 deleteContent에 calendarDomain을 넘겨준다.
+        if (calendarDomain==null){
+            return false;
+        }else {
+            calendarRepository.deleteContent(calendarDomain);
+            return true;
+        }
    }
 
     public List<CalendarTable> getCalendarListAll(int year, int month) {

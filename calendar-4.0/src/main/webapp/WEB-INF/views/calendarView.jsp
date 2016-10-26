@@ -65,7 +65,7 @@
         }
         .btn-default:hover{
             color: white;
-            background-color: #C6E4DE;
+            background-color: #cde4de;
             border-color: #f5f3f3;
         }
         .contentstitle{
@@ -77,6 +77,9 @@
         .moreBtn{
             text-align: right;
             font-size: 9px;
+        }
+        .moreBtn, .contentstitle{
+                       cursor: pointer;
         }
     </style>
 </head>
@@ -138,7 +141,7 @@
                                                 </div>
                                             </c:when>
                                             <c:when test="${titlecount == 2}">
-                                                <div class="moreBtn">more...</div>
+                                                <div class="moreBtn" data-day="${calendarTable.day}">more...</div>
                                             </c:when>
                                         </c:choose>
                                     </c:if>
@@ -161,14 +164,13 @@
         <button type="button" data-target="#myModal" data-toggle="modal" style="display: none">Modal</button>
         <div class="modal fade" id="myModal" role="dialog">
             <div class="modal-dialog">
-
                 <!-- Modal content-->
                 <div class="modal-content">
                     <div class="modal-header" style="padding:35px 50px;">
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
                         <h4><span class="glyphicon glyphicon-calendar"/>&nbsp;${calBean.year}년 ${calBean.month+1}월 <span id="appear_day"></span>일</h4>
                     </div>
-                    <div class="modal-body" style="padding:40px 50px;" data-year="${calBean.year}" data-month="${calBean.month+1}" data-day="" data-calendarnum="">
+                    <div class="modal-body" id="modal-body" style="padding:40px 50px;" data-year="${calBean.year}" data-month="${calBean.month+1}" data-day="" data-calendarnum="">
                         <div class="form-group">
                             <label>&nbsp;<span class="glyphicon glyphicon-tag"></span>&nbsp;Title</label>
                             <input type="text" class="form-control" value="title" name="title" id="title"/>
@@ -185,23 +187,32 @@
                         <button type="button" class="btn btn-default btn-block" data-dismiss="modal" id="modalCloseBtn"><span class="glyphicon glyphicon-log-out"/>&nbsp;Close</button>
                     </div>
                 </div>
+            </div>
+        </div>
 
-                <!-- Modal content-->
-                <%--<div class="modal-content">
-                    <div class="modal-header">
-                        <h4 class="modal-title" id="showModalDate">${calBean.year}년 ${calBean.month+1}월 <span id="appear_day"></span>일</h4>
+        <%--List Modal--%>
+        <button type="button" data-target="#ListModal" data-toggle="modal" style="display: none">Modal</button>
+        <div class="modal fade" id="ListModal" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header" style="padding:35px 50px;">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4><span class="glyphicon glyphicon-calendar"/>&nbsp;${calBean.year}년 ${calBean.month+1}월 <span id="list_modal_appear_day"></span>일</h4>
                     </div>
-                    <div class="modal-body" data-year="${calBean.year}" data-month="${calBean.month+1}" data-day="" data-calendarnum="">
-                        　　 title : <input type="text" value="title" name="title" id="title"/><br>
-                        contents : <input type="text" value="content" name="content" id="content"/>
+                    <div class="modal-body" id="listModalBody" style="padding:15px 15px;" data-year="${calBean.year}" data-month="${calBean.month+1}" data-day="" data-calendarnum="">
+                        <div class="list-group" id="ListModalContentList">
+                            <%--이런 모양으로 content를 불러온다. 내용들이 나올 자리임
+                                <a href="#" class="list-group-item ">
+                                <h5 class="list-group-item-heading">List group item heading</h5>
+                                <p class="list-group-item-text">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
+                            </a>--%>
+                        </div>
+                        <button type="button" class="btn btn-default btn-block"><span class="glyphicon glyphicon-floppy-saved"/>&nbsp;새글</button>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-default" id="contentsSaveBtn">Save</button>
-                        <button type="button" class="btn btn-default" id="contentsUpdateBtn">Update</button>
-                        <button type="button" class="btn btn-default" id="contentsDaeleteBtn">Delete</button>
-                        <button type="button" class="btn btn-default" data-dismiss="modal" id="modalCloseBtn">Close</button>
+                        <button type="button" class="btn btn-default btn-block" data-dismiss="modal"><span class="glyphicon glyphicon-log-out"/>&nbsp;Close</button>
                     </div>
-                </div>--%>
+                </div>
             </div>
         </div>
 
@@ -210,6 +221,111 @@
     </div>
     <script>
         $(document).ready(function () {
+
+            //List Modal
+            $(".moreBtn").click(function () {
+
+                // to show modal
+                $('#ListModal').modal('show');
+
+                //get day
+                var list_modal_day=$(this).data("day");
+
+                //list modal에 날짜 찍기
+                $("#list_modal_appear_day").text(list_modal_day);
+
+                $.ajax({
+
+                    url : "getListModalCalendarDomainList",
+                    type: "post",
+                    dataType : "json",
+
+                    data : {
+                        day : list_modal_day,
+                        month : $("#listModalBody").data("month"),
+                        year : $("#listModalBody").data("year")
+                    },
+
+                    success : function (json) {
+                        console.log(json);
+
+                        var ListModalContent="";
+
+                        $.each(json, function (index, item) {
+                            console.log(item.title);
+                            console.log(item.content);
+                            console.log(item.calendarnum);
+                            ListModalContent+="<a href='#' class='list-group-item' data-day='"+item.day+"' data-title='"+item.title+"' data-content='"+item.content+"' data-calendarnum='"+item.calendarnum+"'>"+
+                                                    "<h5 class='list-group-item-heading'>"+item.title+"</h5>"+
+                                                    "<p class='list-group-item-text'>"+item.content+"</p>"+
+                                                "</a>";
+                        }); //end each
+
+                        $("#ListModalContentList").html(ListModalContent);
+                    } //end success
+
+                });
+            });
+
+            $(document).on("click", ".list-group-item", function () {
+                // to hide modal
+                $('#ListModal').modal('hide');
+                //show modal
+                $('#myModal').modal('show');
+
+                btnControlShowUpdate_delete();
+
+                var v_day=$(this).data("day");
+                var v_title=$(this).data("title");
+                var v_content=$(this).data("content");
+                var v_calendarnum=$(this).data("calendarnum");
+
+                //각각 모달에 넣어줌
+                $("#title").val(v_title);
+                $("#content").val(v_content);
+                $("#appear_day").text(v_day);
+                $("#modal-body").data("calendarnum", v_calendarnum);
+            });
+
+            //리스트에서 selete one으로 보낼 경우,
+            /* $(".list-group-item").click(function () {
+
+                // to hide modal
+                $('#ListModal').modal('hide');
+                //show modal
+                $('#myModal').modal('show');
+
+                btnControlShowUpdate_delete();
+
+                var v_day=$(this).data("day");
+                var v_title=$(this).data("title");
+                var v_content=$(this).data("content");
+                var v_calendarnum=$(this).data("calendarnum");
+
+                $("#title").val(v_title);
+                $("#content").val(v_content);
+                $("#appear_day").val(v_day);
+                $("#modal-body").data("calendarnum", v_calendarnum);
+            });*/
+
+
+            //Delete
+            $("#contentsDaeleteBtn").click(function () {
+                var day=$("#modal-body").data("day");
+                $.ajax({
+                    url : '/deletecontent/'+ $("#modal-body").data("calendarnum"),
+                    success:function (outcomeMsg) {
+                        console.log(outcomeMsg);
+                        $('#myModal').modal('hide');
+                        $("#showTitle"+day).html("");
+
+                        /*두개가 있다가 하나가 지워지는 경우, */
+                    },
+                    error:function (e) {
+                        console.log("DELETE Error - > " +e.responseText);
+                    }
+                });
+            });
 
             //to show modal for inserting
             $("[id='appearDate']").click(function () {
@@ -238,8 +354,8 @@
                     $("#title").val(title);
                     $("#content").val(content);
 
-                    $(".modal-body").data("day", day);
-                    $(".modal-body").data("calendarnum", calendarnum);
+                    $("#modal-body").data("day", day);
+                    $("#modal-body").data("calendarnum", calendarnum);
 
                     btnControlShowUpdate_delete();
 
@@ -247,6 +363,7 @@
                     $("#appear_day").text(day);
                 }
             });
+
             //today style
             $("tbody tr td").each(function (index, element) {
                 //if calBean.day and "day(i)" are same, add style

@@ -8,7 +8,8 @@ import java.util.Date;
  */
 @NamedQueries({
     @NamedQuery(name = "getCalendarListALL", query = "SELECT ct FROM CalendarTable AS ct WHERE ct.year=?1 AND ct.month=?2"),
-    @NamedQuery(name = "getCalendarListONE", query = "SELECT ct FROM CalendarTable AS ct WHERE ct.calendarnum=?1")
+    @NamedQuery(name = "getCalendarListONE", query = "SELECT ct FROM CalendarTable AS ct WHERE ct.calendarnum=?1"),
+    @NamedQuery(name = "getListModalCalendarDomainList", query = "SELECT ct FROM CalendarTable AS ct WHERE ct.year=?1 AND ct.month=?2 AND ct.day=?3")
 })
 @Entity
 @Table(name = "CalendarTable")

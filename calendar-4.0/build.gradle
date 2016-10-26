@@ -31,5 +31,8 @@ dependencies {
     // https://mvnrepository.com/artifact/org.springframework/spring-orm
     compile group: 'org.springframework', name: 'spring-orm', version: '4.3.2.RELEASE'
 
+    // https://mvnrepository.com/artifact/org.codehaus.jackson/jackson-jaxrs
+    compile group: 'org.codehaus.jackson', name: 'jackson-jaxrs', version: '1.6.3'
+
     /*compile fileTree(dir: 'src/main/webapp/WEB-INF/lib', include: ['*.jar'])*/
 }

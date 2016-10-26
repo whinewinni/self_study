@@ -3,11 +3,16 @@ package or.whine.mvc.controller;
 import or.whine.bean.CalendarBean;
 import or.whine.domain.CalendarTable;
 import or.whine.mvc.service.CalendarServiceInterface;
+import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.io.IOException;
 import java.util.Calendar;
 import java.util.List;
 
@@ -28,6 +33,37 @@ public class CalendarController {
 
     //Calendar variable declaration
     private Calendar calendar;
+
+    @RequestMapping(value = "getListModalCalendarDomainList", method = RequestMethod.POST)
+    public @ResponseBody String getEachDayContentList(CalendarTable calendarTable){
+        //get ListModalCalendarDomainList
+        List<CalendarTable> ListModalCalendarDomainList=calendarService.getListModalCalendarDomainList(calendarTable);
+
+        //ObjectMapper 생성 (for Json)
+        ObjectMapper objectMapper=new ObjectMapper();
+
+        String jsonString="";
+        try {
+            jsonString=objectMapper.writeValueAsString(ListModalCalendarDomainList);
+        } catch (IOException e) {
+            System.out.println("getListModalCalendarDomainList-objectMapper-IOException");
+            e.printStackTrace();
+        }
+        return jsonString;
+    }
+
+    @RequestMapping(value = "/deletecontent/{calendarnum}")
+    public @ResponseBody String deleteContent(@PathVariable int calendarnum) throws Exception{
+        /*deleteContent 메소드의 자료형이 bollean이다.
+        실패했을 경우에 Ajax의 success가 fail을 받고 성공했을 경우에는 success를 받는다.*/
+        boolean outcome=calendarService.deleteContent(calendarnum);
+        if (outcome){
+            System.out.println("sGFDGFFDGDGFZdzfg");
+            return "success";
+        }else {
+            return "fail";
+        }
+    }
 
     @RequestMapping(value = "/")
     public String getCurrentCalendar(Model model){

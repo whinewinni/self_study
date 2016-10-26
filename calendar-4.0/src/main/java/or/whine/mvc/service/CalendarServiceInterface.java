@@ -15,5 +15,6 @@ public interface CalendarServiceInterface {
     int saveContent(CalendarTable calendarTable);
     void updateContent(CalendarTable calendarTable);
     boolean deleteContent(int calendarnum) throws Exception;
+    List<CalendarTable> getListModalCalendarDomainList(CalendarTable calendarTable);
 
 } //end CalendarServiceInterface
