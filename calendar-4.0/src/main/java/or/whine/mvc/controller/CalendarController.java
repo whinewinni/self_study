@@ -7,10 +7,7 @@ import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
 import java.util.Calendar;
@@ -33,6 +30,12 @@ public class CalendarController {
 
     //Calendar variable declaration
     private Calendar calendar;
+
+    @RequestMapping(value = "saveContent", method = RequestMethod.POST)
+    public @ResponseBody String saveContent(@ModelAttribute CalendarTable calendarTable){
+        int calendarNum_seq=calendarService.saveContent(calendarTable);
+        return String.valueOf(calendarNum_seq);
+    }
 
     @RequestMapping(value = "getListModalCalendarDomainList", method = RequestMethod.POST)
     public @ResponseBody String getEachDayContentList(CalendarTable calendarTable){

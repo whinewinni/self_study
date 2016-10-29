@@ -30,7 +30,8 @@ public class CalendarRepositoryImple implements CalendarRepositoryInterface{
     }
 
     public int saveContent(CalendarTable calendarTable) {
-        return 0;
+        entityManager.persist(calendarTable);
+        return calendarTable.getCalendarnum();
     }
 
     public void updateContent(CalendarTable calendarTable) {

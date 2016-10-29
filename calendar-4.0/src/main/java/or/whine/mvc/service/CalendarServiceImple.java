@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -20,7 +21,8 @@ public class CalendarServiceImple implements CalendarServiceInterface{
     private CalendarRepositoryInterface calendarRepository;
 
     public int saveContent(CalendarTable calendarTable) {
-        return 0;
+        calendarTable.setScheduleTime(new Date());
+        return calendarRepository.saveContent(calendarTable);
     }
 
     public void updateContent(CalendarTable calendarTable) {

@@ -79,7 +79,10 @@
             font-size: 9px;
         }
         .moreBtn, .contentstitle{
-                       cursor: pointer;
+            cursor: pointer;
+        }
+        .list-group-item-text{
+            font-color: #b1b1b1;
         }
     </style>
 </head>
@@ -124,7 +127,7 @@
                         </c:if>
 
                         <td id="focusToday">
-                            <div id="appearDate" style="height: 50%">
+                            <div id="appearDate" style="height: 50%" data-day="${i}">
                                 ${i}<br/>
                             </div>
                             <div id="appearTitle${i}" style="height: 50%">
@@ -216,11 +219,52 @@
             </div>
         </div>
 
-
-
     </div>
     <script>
         $(document).ready(function () {
+
+            //Save
+            $(".contentsSaveBtn").click(function () {
+                //hide modal
+                $('#myModal').modal('hide');
+
+                $.ajax({
+                    type:'post',
+                    url:'/saveContent',
+                    data:{
+                        title: $("#title").val(),
+                        content:$("#content").val(),
+                        year: ${calBean.year},
+                        month: ${calBean.month+1},
+                        day: $("#appear_day").text()
+                    },
+                    success:function (calendarNum_seq) {
+                        //hide modal
+                        $('#myModal').modal('hide');
+
+                        console.log("SGDFdGdGFdgfgdfgdf calendarNum_seq : "+calendarNum_seq);
+
+                    },
+                    error: function (e) {
+                        console.log("SAVE Error - >"+e.responseText);
+                    }
+                });
+
+            });
+
+            //to show modal for inserting
+            $("[id='appearDate']").click(function () {
+
+                console.log("$(this).text() : "+$.trim($(this).text()));
+
+                //to remove title and content
+                $("#title").val("");
+                $("#content").val("");
+                //show modal
+                $('#myModal').modal('show');
+                //set save mode buttons
+                btnControlShowSave();
+            });
 
             //List Modal
             $(".moreBtn").click(function () {
@@ -256,14 +300,12 @@
                             console.log(item.content);
                             console.log(item.calendarnum);
                             ListModalContent+="<a href='#' class='list-group-item' data-day='"+item.day+"' data-title='"+item.title+"' data-content='"+item.content+"' data-calendarnum='"+item.calendarnum+"'>"+
-                                                    "<h5 class='list-group-item-heading'>"+item.title+"</h5>"+
+                                                    "<h5 class='list-group-item-heading'><b>"+item.title+"</b></h5>"+
                                                     "<p class='list-group-item-text'>"+item.content+"</p>"+
                                                 "</a>";
                         }); //end each
-
                         $("#ListModalContentList").html(ListModalContent);
                     } //end success
-
                 });
             });
 
@@ -325,17 +367,6 @@
                         console.log("DELETE Error - > " +e.responseText);
                     }
                 });
-            });
-
-            //to show modal for inserting
-            $("[id='appearDate']").click(function () {
-                //to remove title and content
-                $("#title").val("");
-                $("#content").val("");
-                //show modal
-                $('#myModal').modal('show');
-                //set save mode buttons
-                btnControlShowSave();
             });
 
             //select one
