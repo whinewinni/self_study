@@ -31,6 +31,12 @@ public class CalendarController {
     //Calendar variable declaration
     private Calendar calendar;
 
+    @RequestMapping(value = "updateContent", method = RequestMethod.POST)
+    public @ResponseBody String updateContent(CalendarTable calendarTable){
+        calendarService.updateContent(calendarTable);
+        return "updateDone";
+    }
+
     @RequestMapping(value = "saveContent", method = RequestMethod.POST)
     public @ResponseBody String saveContent(@ModelAttribute CalendarTable calendarTable){
         int calendarNum_seq=calendarService.saveContent(calendarTable);

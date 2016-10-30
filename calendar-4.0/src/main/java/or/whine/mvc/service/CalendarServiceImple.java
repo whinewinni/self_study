@@ -20,13 +20,14 @@ public class CalendarServiceImple implements CalendarServiceInterface{
     @Autowired
     private CalendarRepositoryInterface calendarRepository;
 
+    @Transactional
     public int saveContent(CalendarTable calendarTable) {
         calendarTable.setScheduleTime(new Date());
         return calendarRepository.saveContent(calendarTable);
     }
 
     public void updateContent(CalendarTable calendarTable) {
-
+        calendarRepository.updateContent(calendarTable);
     }
 
     public List<CalendarTable> getListModalCalendarDomainList(CalendarTable calendarTable) {

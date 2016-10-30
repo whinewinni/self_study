@@ -42,7 +42,8 @@
             background-color: white;
             border-radius: 5px;
             padding: 5px;
-            width: 90px
+            width: 110px;
+            height:85px;
         }
         #weekday, #calendarTitle{
             color: white;
@@ -139,7 +140,7 @@
                                         <c:set var="titlecount" value="${titlecount+1}"/>
                                         <c:choose>
                                             <c:when test="${titlecount == 1}">
-                                                <div class="contentstitle" data-calendarnum="${calendarTable.calendarnum}" data-day="${calendarTable.day}" data-content="${calendarTable.content}">
+                                                <div class="contentstitle" id="contentstitle${i}" data-calendarnum="${calendarTable.calendarnum}" data-day="${calendarTable.day}" data-content="${calendarTable.content}">
                                                     <p id="showTitle${i}">${calendarTable.title}</p>
                                                 </div>
                                             </c:when>
@@ -210,7 +211,7 @@
                                 <p class="list-group-item-text">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
                             </a>--%>
                         </div>
-                        <button type="button" class="btn btn-default btn-block"><span class="glyphicon glyphicon-floppy-saved"/>&nbsp;새글</button>
+                        <button type="button" class="btn btn-default btn-block"><span class="glyphicon glyphicon-floppy-saved" id="createNewBtn"/>&nbsp;새글</button>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default btn-block" data-dismiss="modal"><span class="glyphicon glyphicon-log-out"/>&nbsp;Close</button>
@@ -223,26 +224,93 @@
     <script>
         $(document).ready(function () {
 
-            //Save
-            $(".contentsSaveBtn").click(function () {
+            //create new from list modal
+            $("#createNewBtn").click(function () {
+                $('#ListModal').modal('hide');
+                $('#myModal').modal('show');
+                btnControlShowSave();
+
+                //to remove title and content
+                $("#title").val("");
+                $("#content").val("");
+
+                //to set day
+                $("#appear_day").text($("#list_modal_appear_day").text());
+                $("#modal-body").data("day", $("#list_modal_appear_day").text());
+            });
+
+            //update
+            /*$(document).on("click", "#contentsUpdateBtn", function (){*/
+            $("#contentsUpdateBtn").click(function () {
                 //hide modal
                 $('#myModal').modal('hide');
+
+                var title=$("#title").val();
+                var content=$("#content").val();
+                var year=${calBean.year};
+                var month=${calBean.month+1};
+                var day=$("#appear_day").text();
+                var calendarnum=$("#modal-body").data("calendarnum");
+
+                $.ajax({
+                    type:'post',
+                    url:'/updateContent',
+                    data:{
+                        title: title,
+                        content:content,
+                        year: year,
+                        month: month,
+                        day: day,
+                        calendarnum:calendarnum
+                    },
+                    success:function (msg) {
+
+                        //hide modal
+                        $('#myModal').modal('hide');
+
+                        $("#showTitle"+day).html(title);
+                        /*$("#contentstitle"+day).data("calendarnum", calendarnum);
+                        $("#contentstitle"+day).data("day", day);*/
+                        $("#contentstitle"+day).data("content", content);
+                        $(document).on("data", "#contentstitle"+day, )
+
+                    },
+                    error: function (e) {
+                        console.log("SAVE Error - >"+e.responseText);
+                    }
+                });
+            });
+
+            //Save
+            $("#contentsSaveBtn").click(function () {
+                //hide modal
+                $('#myModal').modal('hide');
+
+                var title=$("#title").val();
+                var content=$("#content").val();
+                var year=${calBean.year};
+                var month=${calBean.month+1};
+                var day=$("#appear_day").text();
 
                 $.ajax({
                     type:'post',
                     url:'/saveContent',
                     data:{
-                        title: $("#title").val(),
-                        content:$("#content").val(),
-                        year: ${calBean.year},
-                        month: ${calBean.month+1},
-                        day: $("#appear_day").text()
+                        title: title,
+                        content:content,
+                        year: year,
+                        month: month,
+                        day: day
                     },
                     success:function (calendarNum_seq) {
                         //hide modal
                         $('#myModal').modal('hide');
 
                         console.log("SGDFdGdGFdgfgdfgdf calendarNum_seq : "+calendarNum_seq);
+
+                        var intoHtml="<div class='contentstitle' data-calendarnum='"+calendarNum_seq+"' data-day='"+day+"' data-content='"+content+"'>"+
+                                     "<p id='showTitle"+day+"'>"+title+"</p></div>";
+                        $("#appearTitle"+day).html(intoHtml);
 
                     },
                     error: function (e) {
@@ -255,7 +323,7 @@
             //to show modal for inserting
             $("[id='appearDate']").click(function () {
 
-                console.log("$(this).text() : "+$.trim($(this).text()));
+                $("#appear_day").text($.trim($(this).text()));
 
                 //to remove title and content
                 $("#title").val("");
@@ -350,7 +418,6 @@
                 $("#modal-body").data("calendarnum", v_calendarnum);
             });*/
 
-
             //Delete
             $("#contentsDaeleteBtn").click(function () {
                 var day=$("#modal-body").data("day");
@@ -370,7 +437,7 @@
             });
 
             //select one
-            $(".contentstitle").click(function () {
+            $(document).on('click', '.contentstitle',function () {
                 //check null
                 if($(this) != null){
                     //show modal
