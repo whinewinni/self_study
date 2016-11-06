@@ -145,7 +145,7 @@
                                                 </div>
                                             </c:when>
                                             <c:when test="${titlecount == 2}">
-                                                <div class="moreBtn" data-day="${calendarTable.day}">more...</div>
+                                                <div class="moreBtn" id="moreBtn${i}" data-day="${calendarTable.day}">more...</div>
                                             </c:when>
                                         </c:choose>
                                     </c:if>
@@ -200,11 +200,11 @@
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header" style="padding:35px 50px;">
-                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <button type="button" class="close closeResetList" data-dismiss="modal">&times;</button>
                         <h4><span class="glyphicon glyphicon-calendar"/>&nbsp;${calBean.year}년 ${calBean.month+1}월 <span id="list_modal_appear_day"></span>일</h4>
                     </div>
                     <div class="modal-body" id="listModalBody" style="padding:15px 15px;" data-year="${calBean.year}" data-month="${calBean.month+1}" data-day="" data-calendarnum="">
-                        <div class="list-group" id="ListModalContentList">
+                        <div class="list-group" id="listModalContentList">
                             <%--이런 모양으로 content를 불러온다. 내용들이 나올 자리임
                                 <a href="#" class="list-group-item ">
                                 <h5 class="list-group-item-heading">List group item heading</h5>
@@ -214,7 +214,7 @@
                         <button type="button" class="btn btn-default btn-block"><span class="glyphicon glyphicon-floppy-saved" id="createNewBtn"/>&nbsp;새글</button>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-default btn-block" data-dismiss="modal"><span class="glyphicon glyphicon-log-out"/>&nbsp;Close</button>
+                        <button type="button" class="btn btn-default btn-block closeResetList" data-dismiss="modal"><span class="glyphicon glyphicon-log-out"/>&nbsp;Close</button>
                     </div>
                 </div>
             </div>
@@ -240,8 +240,9 @@
             });
 
             //update
-            /*$(document).on("click", "#contentsUpdateBtn", function (){*/
             $("#contentsUpdateBtn").click(function () {
+                /*$(document).on("click", "#contentsUpdateBtn", function (){*/
+
                 //hide modal
                 $('#myModal').modal('hide');
 
@@ -271,8 +272,10 @@
                         $("#showTitle"+day).html(title);
                         /*$("#contentstitle"+day).data("calendarnum", calendarnum);
                         $("#contentstitle"+day).data("day", day);*/
+                        alert($("#contentstitle"+day).data("content"));
                         $("#contentstitle"+day).data("content", content);
-                        $(document).on("data", "#contentstitle"+day, )
+                        alert($("#contentstitle"+day).data("content"));
+                        /*$(document).on("data", "#contentstitle"+day, )*/
 
                     },
                     error: function (e) {
@@ -306,10 +309,20 @@
                         //hide modal
                         $('#myModal').modal('hide');
 
-                        console.log("SGDFdGdGFdgfgdfgdf calendarNum_seq : "+calendarNum_seq);
+                        console.log("hasClass : "+$("#appearTitle"+day ).children().hasClass("contentstitle"));
 
-                        var intoHtml="<div class='contentstitle' data-calendarnum='"+calendarNum_seq+"' data-day='"+day+"' data-content='"+content+"'>"+
-                                     "<p id='showTitle"+day+"'>"+title+"</p></div>";
+
+                        var intoHtml=$("#appearTitle"+day).html();
+                        //if appearTitle has contentstitle class, add title and more button
+                        if($("#appearTitle"+day ).children().hasClass("contentstitle") && $("#appearTitle"+day ).children().hasClass("moreBtn")){
+                            intoHtml+="";
+                        }else if( $("#appearTitle"+day ).children().hasClass("contentstitle") ){
+                            intoHtml+="<div class='moreBtn' data-day="+ day +" > more...</div>";
+                        }else {
+                            intoHtml+="<div class='contentstitle' id='contentstitle"+day+"' data-calendarnum='"+calendarNum_seq+"' data-day='"+day+"' data-content='"+content+"'>"+
+                                    "<p id='showTitle"+day+"'>"+title+"</p></div>";
+                        }
+
                         $("#appearTitle"+day).html(intoHtml);
 
                     },
@@ -335,7 +348,8 @@
             });
 
             //List Modal
-            $(".moreBtn").click(function () {
+            $(document).on('click', '.moreBtn',function () {
+            //$(".moreBtn").click(function () {
 
                 // to show modal
                 $('#ListModal').modal('show');
@@ -361,22 +375,23 @@
                     success : function (json) {
                         console.log(json);
 
-                        var ListModalContent="";
+                        var listModalContent="";
 
                         $.each(json, function (index, item) {
                             console.log(item.title);
                             console.log(item.content);
                             console.log(item.calendarnum);
-                            ListModalContent+="<a href='#' class='list-group-item' data-day='"+item.day+"' data-title='"+item.title+"' data-content='"+item.content+"' data-calendarnum='"+item.calendarnum+"'>"+
+                            listModalContent+="<a href='#' class='list-group-item' data-day='"+item.day+"' data-title='"+item.title+"' data-content='"+item.content+"' data-calendarnum='"+item.calendarnum+"'>"+
                                                     "<h5 class='list-group-item-heading'><b>"+item.title+"</b></h5>"+
                                                     "<p class='list-group-item-text'>"+item.content+"</p>"+
                                                 "</a>";
                         }); //end each
-                        $("#ListModalContentList").html(ListModalContent);
+                        $("#listModalContentList").html(listModalContent);
                     } //end success
                 });
             });
 
+            //select one from list Modal
             $(document).on("click", ".list-group-item", function () {
                 // to hide modal
                 $('#ListModal').modal('hide');
@@ -395,6 +410,7 @@
                 $("#content").val(v_content);
                 $("#appear_day").text(v_day);
                 $("#modal-body").data("calendarnum", v_calendarnum);
+                $("#modal-body").data("day", v_day);
             });
 
             //리스트에서 selete one으로 보낼 경우,
@@ -421,14 +437,46 @@
             //Delete
             $("#contentsDaeleteBtn").click(function () {
                 var day=$("#modal-body").data("day");
+                alert(" delete day == "+day)
                 $.ajax({
                     url : '/deletecontent/'+ $("#modal-body").data("calendarnum"),
                     success:function (outcomeMsg) {
                         console.log(outcomeMsg);
                         $('#myModal').modal('hide');
-                        $("#showTitle"+day).html("");
+                        /*$("#showTitle"+day).html("");*/
 
                         /*두개가 있다가 하나가 지워지는 경우, */
+                        /*두개 이상일때 하나가 지워지는 경우*/
+
+                        /*밖에 title*/
+                        var outsideTitleCalNum=$("#contentstitle"+day).data("calendarnum");
+                        var insideTitleCalNum=$("#modal-body").data("calendarnum");
+                        console.log("outsideTitleCalNum "+outsideTitleCalNum)
+                        console.log("insideTitleCalNum "+insideTitleCalNum)
+
+                        var secondTitleInListModal=$("#listModalContentList").children().eq(1);
+                        alert("1");
+                        //밖에 title과 안에 title의 seq num가 같을 경우
+                        if(outsideTitleCalNum == insideTitleCalNum){
+                            alert("2");
+                            //List Modal이 가지고 있는 title의 수가 2개 이상일 경우
+                            if($("#listModalContentList").children().size() >= 2){
+                                alert("3");
+                                $("#contentstitle"+day).data("calendarnum", secondTitleInListModal.data("calendarnum"));
+                                $("#contentstitle"+day).data("day", secondTitleInListModal.data("day"));
+                                $("#contentstitle"+day).data("content", secondTitleInListModal.data("content"));
+                                $("#showTitle"+day).html(secondTitleInListModal.data("title"));
+                            }else {
+                                //List Modal의 title이 0일 경우
+                                $("#showTitle"+day).html("");
+                            }
+                        }
+
+                        //2개일 경우에서 하나를 지우면 more button remove
+                        if($("#listModalContentList").children().size() == 2){
+                            $("#moreBtn"+day).remove();
+                        }
+
                     },
                     error:function (e) {
                         console.log("DELETE Error - > " +e.responseText);
@@ -460,6 +508,11 @@
                     //날짜 일자 표시
                     $("#appear_day").text(day);
                 }
+            });
+
+            //reset List Modal for deleting
+            $(".closeResetList").click(function () {
+                $("#listModalContentList").html("");
             });
 
             //today style
