@@ -3,37 +3,41 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
-<title>Insert title here</title>
-<style>
-	.back{
-		background-color: #98fb98;
-		text-align: center;
-	}
-	table{
-		border: white 1px;
-	}
-</style>
+<title>Detail</title>
+	<style>
+		.back{
+			background-color: #98fb98;
+			text-align: center;
+		}
+		table{
+			border: white 1px;
+		}
+	</style>
 </head>
 <body>
 
 	<table>
 		<thead>
 			<tr>
-				<th class="back">번호 <!-- 요기 --></th><td colspan="2">title</td>
+				<th class="back">${getBoardDetail.boardNum}</th>
+				<td colspan="2">${getBoardDetail.title}</td>
 			</tr>
 			<tr  class="back">
-				<td>작성자</td><td>날짜</td><td>hit</td>
+				<td>${getBoardDetail.writer}</td>
+				<td>${getBoardDetail.boardDate}</td>
+				<td>${getBoardDetail.hit}</td>
 			</tr>
 		</thead>
 		<tbody>
 			<tr>
-				<td colspan="3">내용</td>
+				<td colspan="3">${getBoardDetail.content}</td>
 			</tr>
 		</tbody>
 		<tfoot class="back">
 			<tr>
 				<td colspan="3">
-					<input type="button" value="버튼1">
+					<button type="button" onclick="location='main'">Back To List</button>
+					<button type="button" onclick="location='getModifyForm?boardNum=${getBoardDetail.boardNum}'">Modify</button>
 					<input type="button" value="버튼2">
 					<input type="button" value="버튼3">
 				</td>

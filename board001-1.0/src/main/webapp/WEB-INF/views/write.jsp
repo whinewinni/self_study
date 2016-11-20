@@ -4,20 +4,20 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
-<title>Insert title here</title>
-<style>
-	.back{
-		background-color: #98fb98;
-		text-align: center;
-	}
-	table{
-		border: white 1px;
-	}
-</style>
+<title>Save</title>
+	<style>
+		.back{
+			background-color: #98fb98;
+			text-align: center;
+		}
+		table{
+			border: white 1px;
+		}
+	</style>
 </head>
 <body>
 
-	<form action="">
+	<form action="saveBoard" method="post">
 		<table>
 			<thead class="back">
 				<tr>
@@ -27,22 +27,22 @@
 			<tbody>
 				<tr>
 					<td class="back">작성자</td>
-					<td><input name="" id=""></td>
+					<td><input name="writer" id="writer"></td>
 				</tr>			
 				<tr>
 					<td class="back">제목</td>
-					<td><input name="" id=""></td>
+					<td><input name="title" id="title"></td>
 				</tr>			
 				<tr>
 					<td class="back">내용</td>
-					<td><input style="height: 150px" name="" id=""></td>
+					<td><input style="height: 150px" name="content" id="content"></td>
 				</tr>			
 			</tbody>
 			<tfoot class="back">
 				<tr>
 					<td colspan="2">
-						<input type="button" value="버튼1">
-						<input type="button" value="버튼2">
+						<button type="button" onclick="location='main'">Back To List</button>
+						<button type="submit">Create Done</button>
 						<input type="button" value="버튼3">
 					</td>
 				</tr>			

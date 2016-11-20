@@ -11,4 +11,9 @@ public interface BoardService {
 
     public List<Whineboard> findWhineBoardList();
 
+    public Whineboard findWhineBoardDetail(int boardNum);
+
+    public int saveBoard(Whineboard whineboard);
+
+    public void updateBoard(Whineboard whineboard);
 } //edn BoardService

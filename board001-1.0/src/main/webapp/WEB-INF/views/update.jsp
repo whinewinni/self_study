@@ -17,7 +17,8 @@
 </head>
 <body>
 
-	<form action="">
+	<form action="modifyBoard" method="post">
+		<input type="hidden" value="${modifyData.boardNum}"/>
 		<table>
 			<thead class="back">
 				<tr>
@@ -27,22 +28,24 @@
 			<tbody>
 				<tr>
 					<td class="back">작성자</td>
-					<td><input name="" id=""></td>
+					<td><input name="writer" id="writer" value="${modifyData.writer}"/></td>
 				</tr>			
 				<tr>
 					<td class="back">제목</td>
-					<td><input name="" id=""></td>
+					<td><input name="title" id="title" value="${modifyData.title}"/></td>
 				</tr>			
 				<tr>
 					<td class="back">내용</td>
-					<td><input style="height: 150px" name="" id=""></td>
+					<td>
+						<input style="height: 150px" name="content" id="content" value="${modifyData.content}"/>
+					</td>
 				</tr>			
 			</tbody>
 			<tfoot class="back">
 				<tr>
 					<td colspan="2">
-						<input type="button" value="버튼1">
-						<input type="button" value="버튼2">
+						<button type="button" onclick="location='main'">Back To List</button>
+						<button type="submit" onclick="location='modifyBoard'">Update</button>
 						<input type="button" value="버튼3">
 					</td>
 				</tr>			

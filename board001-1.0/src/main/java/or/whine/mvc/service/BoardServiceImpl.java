@@ -5,6 +5,7 @@ import or.whine.mvc.reprsitory.BoardRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -18,5 +19,18 @@ public class BoardServiceImpl implements BoardService{
 
     public List<Whineboard> findWhineBoardList() {
         return boardRepository.findWhineBoardList();
+    }
+
+    public Whineboard findWhineBoardDetail(int boardNum) {
+        return boardRepository.findWhineBoardDetail(boardNum);
+    }
+
+    public int saveBoard(Whineboard whineboard) {
+        whineboard.setBoardDate(new Date());
+        return boardRepository.saveBoard(whineboard);
+    }
+
+    public void updateBoard(Whineboard whineboard) {
+        boardRepository.updateBoard(whineboard);
     }
 }

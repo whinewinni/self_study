@@ -10,4 +10,10 @@ import java.util.List;
 public interface BoardRepository {
 
     public List<Whineboard> findWhineBoardList();
+
+    public Whineboard findWhineBoardDetail(int boardNum);
+
+    public int saveBoard(Whineboard whineboard);
+
+    public void updateBoard(Whineboard whineboard);
 } //end BoardRepository class

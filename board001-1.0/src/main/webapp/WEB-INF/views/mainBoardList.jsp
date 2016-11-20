@@ -19,23 +19,27 @@
 	<table>
 		<thead class="back">
 			<tr>
-				<th colspan="5">게시판 목록</th>
+				<th colspan="5">Boiard List</th>
 			</tr>
 			<tr>
-				<td>글번호</td>
-				<td style="width: 200px">제목</td>
-				<td>작성자</td>
-				<td>작성일</td>
-				<td>조회수</td>
+				<td>No.</td>
+				<td style="width: 200px">title</td>
+				<td>writer</td>
+				<td>Date</td>
+				<td>hit</td>
 			</tr>
 		</thead>
 		<tbody>
 			<c:forEach var="findWhineBoard" items="${findWhineBoardList}">
 				<tr>
-					<td>${findWhineBoard.boardnum}</td>
-					<td>${findWhineBoard.title}</td>
+					<td>${findWhineBoard.boardNum}</td>
+					<td>
+						<a href="getDetail?boardNum=${findWhineBoard.boardNum}">
+							${findWhineBoard.title}
+						</a>
+					</td>
 					<td>${findWhineBoard.writer}</td>
-					<td>${findWhineBoard.boarddate}</td>
+					<td>${findWhineBoard.boardDate}</td>
 					<td>${findWhineBoard.hit}</td>
 				</tr>
 			</c:forEach>
@@ -43,7 +47,9 @@
 		<tfoot class="back">
 			<tr>
 				<th colspan="5">
-					<input type="button" value="버튼1">
+					<button type="button" onclick="location='getWritePage'">
+						Create New Board
+					</button>
 				</th>
 			</tr>
 		</tfoot>
