@@ -54,23 +54,17 @@ public class BoardController {
     @RequestMapping(value = "/getModifyForm", method = RequestMethod.GET)
     public String getModifyForm(Model model, int boardNum){
         Whineboard getModifyForm=boardService.findWhineBoardDetail(boardNum);
-        model.addAttribute("modifyData",getModifyForm);
+        model.addAttribute("modifyData", getModifyForm);
         return "update";
     }
 
-    /*@RequestMapping(value = "/modifyBoard", method = RequestMethod.POST)
+    @RequestMapping(value = "/modifyBoard", method = RequestMethod.POST)
     public String modifyDone(Whineboard whineboard){
         System.out.println("Log 01");
         System.out.println(whineboard.getBoardNum());
         boardService.updateBoard(whineboard);
         System.out.println("Log 02");
         return "redirect:/getDetail?boardNum="+whineboard.getBoardNum();
-    }*/
-
-    @RequestMapping(value = "/modifyBoard", method = RequestMethod.POST)
-    public String modifyDone(Whineboard whineboard){
-        System.out.println("Log 01");
-
-        return "redirect:/getDetail?boardNum="+whineboard.getBoardNum();
     }
+
 } //end  BoardController class

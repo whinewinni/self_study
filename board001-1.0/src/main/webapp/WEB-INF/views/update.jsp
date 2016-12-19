@@ -18,9 +18,9 @@
 <body>
 
 	<form action="modifyBoard" method="post">
-		<input type="hidden" name="boardNum" value="${modifyData.boardNum}"/>
-		<input type="hidden" name="boardDate" value="${modifyData.boardDate}"/>
-		<input type="hidden" name="hit" value="${modifyData.hit}"/>
+		<input type="text" name="boardNum" value="${modifyData.boardNum}"/>
+		<%--<input type="text" name="boardDate" value="${modifyData.boardDate}"/>
+		<input type="text" name="hit" value="${modifyData.hit}"/>--%>
 		<table>
 			<thead class="back">
 				<tr>
@@ -48,7 +48,6 @@
 					<td colspan="2">
 						<button type="submit">Update</button>
 						<button type="button" onclick="location='main'">Back To List</button>
-						<input type="button" value="¹öÆ°3">
 					</td>
 				</tr>			
 			</tfoot>
